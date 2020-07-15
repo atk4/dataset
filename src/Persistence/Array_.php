@@ -93,17 +93,17 @@ class Array_ extends Persistence
             throw new \Error('debug!!');
         }
 
-        if (isset($model->table) && !isset($this->data[$model->table])) {
+        if (!isset($this->data[$model->table])) {
             throw (new Exception('Table was not found in the array data source'))
                 ->addMoreInfo('table', $model->table);
         }
 
-        if (!isset($this->data[$table ?? $model->table][$id])) {
+        if (!isset($this->data[$model->table][$id])) {
             throw (new Exception('Record with specified ID was not found', 404))
                 ->addMoreInfo('id', $id);
         }
 
-        return $this->tryLoad($model, $id, $table);
+        return $this->tryLoad($model, $id);
     }
 
     /**
@@ -118,20 +118,16 @@ class Array_ extends Persistence
             throw new \Error('debug!!');
         }
 
-        $table = $table ?? $model->table;
-
-        if (!isset($this->data[$table][$id])) {
+        if (!isset($this->data[$model->table][$id])) {
             return null;
         }
 
-        return $this->typecastLoadRow($model, $this->data[$table][$id]);
+        return $this->typecastLoadRow($model, $this->data[$model->table][$id]);
     }
 
     /**
      * Tries to load first available record and return data record.
      * Doesn't throw exception if model can't be loaded or there are no data records.
-     *
-     * @param mixed $table
      */
     public function tryLoadAny(Model $model, string $table = null): ?array
     {
@@ -139,16 +135,14 @@ class Array_ extends Persistence
             throw new \Error('debug!!');
         }
 
-        $table = $table ?? $model->table;
-
-        if (!$this->data[$table]) {
+        if (!$this->data[$model->table]) {
             return null;
         }
 
-        reset($this->data[$table]);
-        $id = key($this->data[$table]);
+        reset($this->data[$model->table]);
+        $id = key($this->data[$model->table]);
 
-        $row = $this->load($model, $id, $table);
+        $row = $this->load($model, $id);
         $model->id = $id;
 
         return $row;
@@ -165,15 +159,13 @@ class Array_ extends Persistence
             throw new \Error('debug!!');
         }
 
-        $table = $table ?? $model->table;
-
         $data = $this->typecastSaveRow($model, $data);
 
-        $id = $this->generateNewId($model, $table);
+        $id = $this->generateNewId($model);
         if ($model->id_field) {
             $data[$model->id_field] = $id;
         }
-        $this->data[$table][$id] = $data;
+        $this->data[$model->table][$id] = $data;
 
         return $id;
     }
@@ -191,11 +183,9 @@ class Array_ extends Persistence
             throw new \Error('debug!!');
         }
 
-        $table = $table ?? $model->table;
-
         $data = $this->typecastSaveRow($model, $data);
 
-        $this->data[$table][$id] = array_merge($this->data[$table][$id] ?? [], $data);
+        $this->data[$model->table][$id] = array_merge($this->data[$model->table][$id] ?? [], $data);
 
         return $id;
     }
@@ -211,31 +201,27 @@ class Array_ extends Persistence
             throw new \Error('debug!!');
         }
 
-        $table = $table ?? $model->table;
-
-        unset($this->data[$table][$id]);
+        unset($this->data[$model->table][$id]);
     }
 
     /**
      * Generates new record ID.
      *
-     * @param Model $model
-     *
      * @return string
      */
-    public function generateNewId($model, string $table = null)
+    public function generateNewId(Model $model)
     {
-        if ($table !== null) {
-            throw new \Error('debug!!');
+        if ($model->id_field) {
+            $ids = array_keys($this->data[$model->table]);
+            $type = $model->getField($model->id_field)->type;
+        } else {
+            $ids = [count($this->data[$model->table])]; // use ids starting from 1
+            $type = 'integer';
         }
-
-        $table = $table ?? $model->table;
-
-        $type = $model->id_field ? $model->getField($model->id_field)->type : 'integer';
 
         switch ($type) {
             case 'integer':
-                $ids = $model->id_field ? array_keys($this->data[$table]) : [count($this->data[$table])];
+                $ids = $model->id_field ? array_keys($this->data[$model->table]) : [count($this->data[$model->table])];
 
                 $id = $ids ? max($ids) + 1 : 1;
 
@@ -249,7 +235,7 @@ class Array_ extends Persistence
                     ->addMoreInfo('type', $type);
         }
 
-        return $this->lastInsertIds[$table] = $this->lastInsertIds['$'] = $id;
+        return $this->lastInsertIds[$model->table] = $this->lastInsertIds['$'] = $id;
     }
 
     /**
@@ -310,7 +296,7 @@ class Array_ extends Persistence
     }
 
     /**
-     * Will set limit defined inside $m onto data.
+     * Will set limit defined inside $model onto data.
      */
     protected function setLimitOrder(Model $model, \atk4\data\Action\Iterator $action)
     {

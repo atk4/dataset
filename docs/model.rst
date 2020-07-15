@@ -532,7 +532,7 @@ Populating Data
 
     The method will still convert the data needed and operate with joined
     tables as needed. If you wish to access tables directly, you'll have to look
-    into Persistence::insert($m, $data, $table);
+    into Persistence::insert($m, $data);
 
 
 

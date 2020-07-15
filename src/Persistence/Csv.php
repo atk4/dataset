@@ -356,17 +356,9 @@ class Csv extends Persistence
      *
      * @return string
      */
-    public function generateNewId(Model $model, string $table = null)
+    public function generateNewId(Model $model)
     {
-        if ($table !== null) {
-            throw new \Error('debug!!');
-        }
-
-        if ($table === null) {
-            $table = $model->table;
-        }
-
-        $ids = array_keys($this->data[$table]);
+        $ids = array_keys($this->data[$model->table]);
 
         $type = $model->getField($model->id_field)->type;
 
