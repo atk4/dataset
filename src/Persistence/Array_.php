@@ -89,6 +89,10 @@ class Array_ extends Persistence
      */
     public function load(Model $model, $id, string $table = null): array
     {
+        if ($table !== null) {
+            throw new \Error('debug!!');
+        }
+
         if (isset($model->table) && !isset($this->data[$model->table])) {
             throw (new Exception('Table was not found in the array data source'))
                 ->addMoreInfo('table', $model->table);
@@ -110,6 +114,10 @@ class Array_ extends Persistence
      */
     public function tryLoad(Model $model, $id, string $table = null): ?array
     {
+        if ($table !== null) {
+            throw new \Error('debug!!');
+        }
+
         $table = $table ?? $model->table;
 
         if (!isset($this->data[$table][$id])) {
@@ -127,6 +135,10 @@ class Array_ extends Persistence
      */
     public function tryLoadAny(Model $model, string $table = null): ?array
     {
+        if ($table !== null) {
+            throw new \Error('debug!!');
+        }
+
         $table = $table ?? $model->table;
 
         if (!$this->data[$table]) {
@@ -149,6 +161,10 @@ class Array_ extends Persistence
      */
     public function insert(Model $model, array $data, string $table = null)
     {
+        if ($table !== null) {
+            throw new \Error('debug!!');
+        }
+
         $table = $table ?? $model->table;
 
         $data = $this->typecastSaveRow($model, $data);
@@ -171,6 +187,10 @@ class Array_ extends Persistence
      */
     public function update(Model $model, $id, array $data, string $table = null)
     {
+        if ($table !== null) {
+            throw new \Error('debug!!');
+        }
+
         $table = $table ?? $model->table;
 
         $data = $this->typecastSaveRow($model, $data);
@@ -187,6 +207,10 @@ class Array_ extends Persistence
      */
     public function delete(Model $model, $id, string $table = null)
     {
+        if ($table !== null) {
+            throw new \Error('debug!!');
+        }
+
         $table = $table ?? $model->table;
 
         unset($this->data[$table][$id]);
@@ -201,6 +225,10 @@ class Array_ extends Persistence
      */
     public function generateNewId($model, string $table = null)
     {
+        if ($table !== null) {
+            throw new \Error('debug!!');
+        }
+
         $table = $table ?? $model->table;
 
         $type = $model->id_field ? $model->getField($model->id_field)->type : 'integer';
