@@ -70,19 +70,19 @@ class TypecastingTest extends \atk4\schema\PhpunitTestCase
         $m->addField('float', ['type' => 'float']);
         $m->addField('integer', ['type' => 'integer']);
         $m->addField('array', ['type' => 'array']);
-        $mm = (clone $m)->load(1);
+        $m->load(1);
 
-        $this->assertSame('foo', $mm->get('string'));
-        $this->assertTrue($mm->get('boolean'));
-        $this->assertSame(8.20, $mm->get('money'));
-        $this->assertEquals(new \DateTime('2013-02-20'), $mm->get('date'));
-        $this->assertEquals(new \DateTime('2013-02-20 20:00:12 UTC'), $mm->get('datetime'));
-        $this->assertEquals(new \DateTime('1970-01-01 12:00:50'), $mm->get('time'));
-        $this->assertSame(2940, $mm->get('integer'));
-        $this->assertSame([1, 2, 3], $mm->get('array'));
-        $this->assertSame(8.202343, $mm->get('float'));
+        $this->assertSame('foo', $m->get('string'));
+        $this->assertTrue($m->get('boolean'));
+        $this->assertSame(8.20, $m->get('money'));
+        $this->assertEquals(new \DateTime('2013-02-20'), $m->get('date'));
+        $this->assertEquals(new \DateTime('2013-02-20 20:00:12 UTC'), $m->get('datetime'));
+        $this->assertEquals(new \DateTime('1970-01-01 12:00:50'), $m->get('time'));
+        $this->assertSame(2940, $m->get('integer'));
+        $this->assertSame([1, 2, 3], $m->get('array'));
+        $this->assertSame(8.202343, $m->get('float'));
 
-        $m/*->duplicate()*/->setMulti(array_diff_key($mm->get(), ['id' => true]))->save();
+        $m->duplicate()->save();
 
         $dbData = [
             'types' => [
@@ -164,41 +164,41 @@ class TypecastingTest extends \atk4\schema\PhpunitTestCase
         $m->addField('float', ['type' => 'float']);
         $m->addField('array', ['type' => 'array']);
         $m->addField('object', ['type' => 'object']);
-        $mm = (clone $m)->load(1);
+        $m->load(1);
 
         // Only
-        $this->assertSame('', $mm->get('string'));
-        $this->assertSame('', $mm->get('notype'));
-        $this->assertNull($mm->get('date'));
-        $this->assertNull($mm->get('datetime'));
-        $this->assertNull($mm->get('time'));
-        $this->assertNull($mm->get('boolean'));
-        $this->assertNull($mm->get('integer'));
-        $this->assertNull($mm->get('money'));
-        $this->assertNull($mm->get('float'));
-        $this->assertNull($mm->get('array'));
-        $this->assertNull($mm->get('object'));
+        $this->assertSame('', $m->get('string'));
+        $this->assertSame('', $m->get('notype'));
+        $this->assertNull($m->get('date'));
+        $this->assertNull($m->get('datetime'));
+        $this->assertNull($m->get('time'));
+        $this->assertNull($m->get('boolean'));
+        $this->assertNull($m->get('integer'));
+        $this->assertNull($m->get('money'));
+        $this->assertNull($m->get('float'));
+        $this->assertNull($m->get('array'));
+        $this->assertNull($m->get('object'));
 
         unset($row['id']);
-        $mm->setMulti($row);
+        $m->setMulti($row);
 
-        $this->assertSame('', $mm->get('string'));
-        $this->assertSame('', $mm->get('notype'));
-        $this->assertNull($mm->get('date'));
-        $this->assertNull($mm->get('datetime'));
-        $this->assertNull($mm->get('time'));
-        $this->assertNull($mm->get('boolean'));
-        $this->assertNull($mm->get('integer'));
-        $this->assertNull($mm->get('money'));
-        $this->assertNull($mm->get('float'));
-        $this->assertNull($mm->get('array'));
-        $this->assertNull($mm->get('object'));
-        $this->assertSame([], $mm->dirty);
+        $this->assertSame('', $m->get('string'));
+        $this->assertSame('', $m->get('notype'));
+        $this->assertNull($m->get('date'));
+        $this->assertNull($m->get('datetime'));
+        $this->assertNull($m->get('time'));
+        $this->assertNull($m->get('boolean'));
+        $this->assertNull($m->get('integer'));
+        $this->assertNull($m->get('money'));
+        $this->assertNull($m->get('float'));
+        $this->assertNull($m->get('array'));
+        $this->assertNull($m->get('object'));
+        $this->assertSame([], $m->dirty);
 
-        $mm->save();
+        $m->save();
         $this->assertEquals($dbData, $this->getDb());
 
-        $m/*->duplicate()*/->setMulti(array_diff_key($mm->get(), ['id' => true]))->save();
+        $m->duplicate()->save();
 
         $dbData['types'][2] = [
             'id' => 2,
@@ -285,20 +285,19 @@ class TypecastingTest extends \atk4\schema\PhpunitTestCase
 
         $m->addField('rot13', ['typecast' => [$rot, $rot]]);
 
-        $mm = (clone $m)->load(1);
+        $m->load(1);
 
-        $this->assertSame('hello world', $mm->get('rot13'));
-        $this->assertSame(1, (int) $mm->id);
-        $this->assertSame(1, (int) $mm->get('id'));
-        $this->assertSame('2013-02-21 05:00:12.235689', (string) $mm->get('datetime'));
-        $this->assertSame('2013-02-20', (string) $mm->get('date'));
-        $this->assertSame('12:00:50.235689', (string) $mm->get('time'));
+        $this->assertSame('hello world', $m->get('rot13'));
+        $this->assertSame(1, (int) $m->id);
+        $this->assertSame(1, (int) $m->get('id'));
+        $this->assertSame('2013-02-21 05:00:12.235689', (string) $m->get('datetime'));
+        $this->assertSame('2013-02-20', (string) $m->get('date'));
+        $this->assertSame('12:00:50.235689', (string) $m->get('time'));
 
-        $this->assertTrue($mm->get('b1'));
-        $this->assertFalse($mm->get('b2'));
+        $this->assertTrue($m->get('b1'));
+        $this->assertFalse($m->get('b2'));
 
-        (clone $m)/*->duplicate()*/->setMulti(array_diff_key($mm->get(), ['id' => true]))->save();
-        $m->delete(1);
+        $m->duplicate()->save()->delete(1);
 
         unset($dbData['types'][0]);
         $row['money'] = '8.2'; // here it will loose last zero and that's as expected

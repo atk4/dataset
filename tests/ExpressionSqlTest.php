@@ -41,13 +41,13 @@ class ExpressionSqlTest extends \atk4\schema\PhpunitTestCase
             );
         }
 
-        $ii = (clone $i)->tryLoad(1);
-        $this->assertEquals(10, $ii->get('total_net'));
-        $this->assertEquals($ii->get('total_net') + $ii->get('total_vat'), $ii->get('total_gross'));
+        $i->tryLoad(1);
+        $this->assertEquals(10, $i->get('total_net'));
+        $this->assertEquals($i->get('total_net') + $i->get('total_vat'), $i->get('total_gross'));
 
-        $ii = (clone $i)->tryLoad(2);
-        $this->assertEquals(20, $ii->get('total_net'));
-        $this->assertEquals($ii->get('total_net') + $ii->get('total_vat'), $ii->get('total_gross'));
+        $i->tryLoad(2);
+        $this->assertEquals(20, $i->get('total_net'));
+        $this->assertEquals($i->get('total_net') + $i->get('total_vat'), $i->get('total_gross'));
 
         $i->addExpression('double_total_gross', '[total_gross]*2');
 
@@ -84,13 +84,13 @@ class ExpressionSqlTest extends \atk4\schema\PhpunitTestCase
             );
         }
 
-        $ii = (clone $i)->tryLoad(1);
-        $this->assertEquals(10, $ii->get('total_net'));
-        $this->assertEquals($ii->get('total_net') + $ii->get('total_vat'), $ii->get('total_gross'));
+        $i->tryLoad(1);
+        $this->assertEquals(10, $i->get('total_net'));
+        $this->assertEquals($i->get('total_net') + $i->get('total_vat'), $i->get('total_gross'));
 
-        $ii = (clone $i)->tryLoad(2);
-        $this->assertEquals(20, $ii->get('total_net'));
-        $this->assertEquals($ii->get('total_net') + $ii->get('total_vat'), $ii->get('total_gross'));
+        $i->tryLoad(2);
+        $this->assertEquals(20, $i->get('total_net'));
+        $this->assertEquals($i->get('total_net') + $i->get('total_vat'), $i->get('total_gross'));
     }
 
     public function testQuery()
@@ -179,11 +179,11 @@ class ExpressionSqlTest extends \atk4\schema\PhpunitTestCase
 
         $m->addExpression('sum', '[a] + [b]');
 
-        $mm = (clone $m)->load(1);
-        $this->assertEquals(4, $mm->get('sum'));
+        $m->load(1);
+        $this->assertEquals(4, $m->get('sum'));
 
-        $mm->save(['a' => 3]);
-        $this->assertEquals(5, $mm->get('sum'));
+        $m->save(['a' => 3]);
+        $this->assertEquals(5, $m->get('sum'));
 
         $this->assertEquals(9, $m->unload()->save(['a' => 4, 'b' => 5])->get('sum'));
 
@@ -193,11 +193,11 @@ class ExpressionSqlTest extends \atk4\schema\PhpunitTestCase
 
         $m->addExpression('sum', '[a] + [b]');
 
-        $mm = (clone $m)->load(1);
-        $this->assertEquals(4, $mm->get('sum'));
+        $m->load(1);
+        $this->assertEquals(4, $m->get('sum'));
 
-        $mm->save(['a' => 3]);
-        $this->assertEquals(4, $mm->get('sum'));
+        $m->save(['a' => 3]);
+        $this->assertEquals(4, $m->get('sum'));
 
         $this->assertNull($m->unload()->save(['a' => 4, 'b' => 5])->get('sum'));
     }

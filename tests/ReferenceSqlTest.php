@@ -36,21 +36,21 @@ class ReferenceSqlTest extends \atk4\schema\PhpunitTestCase
 
         $u->hasMany('Orders', $o);
 
-        $oo = (clone $u)->load(1)->ref('Orders');
-        $ooo = (clone $oo)->tryLoad(1);
-        $this->assertEquals(20, $ooo->get('amount'));
-        $ooo = (clone $oo)->tryLoad(2);
-        $this->assertNull($ooo->get('amount'));
-        $ooo = (clone $oo)->tryLoad(3);
-        $this->assertEquals(5, $ooo->get('amount'));
+        $oo = $u->load(1)->ref('Orders');
+        $oo->tryLoad(1);
+        $this->assertEquals(20, $oo->get('amount'));
+        $oo->tryLoad(2);
+        $this->assertNull($oo->get('amount'));
+        $oo->tryLoad(3);
+        $this->assertEquals(5, $oo->get('amount'));
 
-        $oo = (clone $u)->load(2)->ref('Orders');
-        $ooo = (clone $oo)->tryLoad(1);
-        $this->assertNull($ooo->get('amount'));
-        $ooo = (clone $oo)->tryLoad(2);
-        $this->assertEquals(15, $ooo->get('amount'));
-        $ooo = (clone $oo)->tryLoad(3);
-        $this->assertNull($ooo->get('amount'));
+        $oo = $u->load(2)->ref('Orders');
+        $oo->tryLoad(1);
+        $this->assertNull($oo->get('amount'));
+        $oo->tryLoad(2);
+        $this->assertEquals(15, $oo->get('amount'));
+        $oo->tryLoad(3);
+        $this->assertNull($oo->get('amount'));
 
         $oo = $u->unload()->addCondition('id', '>', '1')->ref('Orders');
 
@@ -97,11 +97,11 @@ class ReferenceSqlTest extends \atk4\schema\PhpunitTestCase
 
         $u->hasMany('cur', [$c, 'our_field' => 'currency', 'their_field' => 'currency']);
 
-        $cc = (clone $u)->load(1)->ref('cur');
+        $cc = $u->load(1)->ref('cur');
         $cc->tryLoadAny();
         $this->assertSame('Euro', $cc->get('name'));
 
-        $cc = (clone $u)->load(2)->ref('cur');
+        $cc = $u->load(2)->ref('cur');
         $cc->tryLoadAny();
         $this->assertSame('Pound', $cc->get('name'));
     }
@@ -145,10 +145,10 @@ class ReferenceSqlTest extends \atk4\schema\PhpunitTestCase
 
         $o->hasOne('user_id', $u);
 
-        $this->assertSame('John', (clone $o)->load(1)->ref('user_id')->get('name'));
-        $this->assertSame('Peter', (clone $o)->load(2)->ref('user_id')->get('name'));
-        $this->assertSame('John', (clone $o)->load(3)->ref('user_id')->get('name'));
-        $this->assertSame('Joe', (clone $o)->load(5)->ref('user_id')->get('name'));
+        $this->assertSame('John', $o->load(1)->ref('user_id')->get('name'));
+        $this->assertSame('Peter', $o->load(2)->ref('user_id')->get('name'));
+        $this->assertSame('John', $o->load(3)->ref('user_id')->get('name'));
+        $this->assertSame('Joe', $o->load(5)->ref('user_id')->get('name'));
 
         $o->unload();
         $o->addCondition('amount', '>', 6);
@@ -185,22 +185,22 @@ class ReferenceSqlTest extends \atk4\schema\PhpunitTestCase
         $o = (new Model($this->db, 'order'))->addFields(['amount']);
         $o->hasOne('user_id', $u)->addFields(['username' => 'name', ['date', 'type' => 'date']]);
 
-        $this->assertSame('John', (clone $o)->load(1)->get('username'));
-        $this->assertEquals(new \DateTime('2001-01-02'), (clone $o)->load(1)->get('date'));
+        $this->assertSame('John', $o->load(1)->get('username'));
+        $this->assertEquals(new \DateTime('2001-01-02'), $o->load(1)->get('date'));
 
-        $this->assertSame('Peter', (clone $o)->load(2)->get('username'));
-        $this->assertSame('John', (clone $o)->load(3)->get('username'));
-        $this->assertSame('Joe', (clone $o)->load(5)->get('username'));
+        $this->assertSame('Peter', $o->load(2)->get('username'));
+        $this->assertSame('John', $o->load(3)->get('username'));
+        $this->assertSame('Joe', $o->load(5)->get('username'));
 
         // few more tests
         $o = (new Model($this->db, 'order'))->addFields(['amount']);
         $o->hasOne('user_id', $u)->addFields(['username' => 'name', 'thedate' => ['date', 'type' => 'date']]);
-        $this->assertSame('John', (clone $o)->load(1)->get('username'));
+        $this->assertSame('John', $o->load(1)->get('username'));
         $this->assertEquals(new \DateTime('2001-01-02'), $o->load(1)->get('thedate'));
 
         $o = (new Model($this->db, 'order'))->addFields(['amount']);
         $o->hasOne('user_id', $u)->addFields(['date'], ['type' => 'date']);
-        $this->assertEquals(new \DateTime('2001-01-02'), (clone $o)->load(1)->get('date'));
+        $this->assertEquals(new \DateTime('2001-01-02'), $o->load(1)->get('date'));
     }
 
     public function testRelatedExpression()
@@ -328,26 +328,26 @@ class ReferenceSqlTest extends \atk4\schema\PhpunitTestCase
                 ['len2',      'expr' => 'sum(length([name]))'],
                 ['chicken5',  'expr' => 'sum([])', 'args' => ['5']],
             ]);
+        $l->load(1);
 
-        $ll = (clone $l)->load(1);
-        $this->assertEquals(2, $ll->get('items_name')); // 2 not-null values
-        $this->assertEquals(1, $ll->get('items_code')); // only 1 not-null value
-        $this->assertEquals(2, $ll->get('items_star')); // 2 rows in total
-        $this->assertSame('Pork::Chicken', $ll->get('items_c:'));
-        $this->assertSame('Pork-Chicken', $ll->get('items_c-'));
-        $this->assertEquals(strlen('Chicken') + strlen('Pork'), $ll->get('len'));
-        $this->assertEquals(strlen('Chicken') + strlen('Pork'), $ll->get('len2'));
-        $this->assertEquals(10, $ll->get('chicken5'));
+        $this->assertEquals(2, $l->get('items_name')); // 2 not-null values
+        $this->assertEquals(1, $l->get('items_code')); // only 1 not-null value
+        $this->assertEquals(2, $l->get('items_star')); // 2 rows in total
+        $this->assertSame('Pork::Chicken', $l->get('items_c:'));
+        $this->assertSame('Pork-Chicken', $l->get('items_c-'));
+        $this->assertEquals(strlen('Chicken') + strlen('Pork'), $l->get('len'));
+        $this->assertEquals(strlen('Chicken') + strlen('Pork'), $l->get('len2'));
+        $this->assertEquals(10, $l->get('chicken5'));
 
-        $ll = (clone $l)->load(2);
-        $this->assertEquals(0, $ll->get('items_name'));
-        $this->assertEquals(0, $ll->get('items_code'));
-        $this->assertEquals(0, $ll->get('items_star'));
-        $this->assertEquals('', $ll->get('items_c:'));
-        $this->assertEquals('', $ll->get('items_c-'));
-        $this->assertNull($ll->get('len'));
-        $this->assertNull($ll->get('len2'));
-        $this->assertNull($ll->get('chicken5'));
+        $l->load(2);
+        $this->assertEquals(0, $l->get('items_name'));
+        $this->assertEquals(0, $l->get('items_code'));
+        $this->assertEquals(0, $l->get('items_star'));
+        $this->assertEquals('', $l->get('items_c:'));
+        $this->assertEquals('', $l->get('items_c-'));
+        $this->assertNull($l->get('len'));
+        $this->assertNull($l->get('len2'));
+        $this->assertNull($l->get('chicken5'));
     }
 
     public function testReferenceHasOneTraversing()
@@ -424,28 +424,28 @@ class ReferenceSqlTest extends \atk4\schema\PhpunitTestCase
         $u->hasOne('contact_id', $c)
             ->addField('address');
 
-        $uu = (clone $u)->load(1);
-        $this->assertSame('John contact', $uu->get('address'));
-        $this->assertSame('John contact', $uu->ref('contact_id')->get('address'));
+        $u->load(1);
+        $this->assertSame('John contact', $u->get('address'));
+        $this->assertSame('John contact', $u->ref('contact_id')->get('address'));
 
-        $uu = (clone $u)->load(2);
-        $this->assertNull($uu->get('address'));
-        $this->assertNull($uu->get('contact_id'));
-        $this->assertNull($uu->ref('contact_id')->get('address'));
+        $u->load(2);
+        $this->assertNull($u->get('address'));
+        $this->assertNull($u->get('contact_id'));
+        $this->assertNull($u->ref('contact_id')->get('address'));
 
-        $uu = (clone $u)->load(3);
-        $this->assertSame('Joe contact', $uu->get('address'));
-        $this->assertSame('Joe contact', $uu->ref('contact_id')->get('address'));
+        $u->load(3);
+        $this->assertSame('Joe contact', $u->get('address'));
+        $this->assertSame('Joe contact', $u->ref('contact_id')->get('address'));
 
-        $uu = (clone $u)->load(2);
-        $uu->ref('contact_id')->save(['address' => 'Peters new contact']);
+        $u->load(2);
+        $u->ref('contact_id')->save(['address' => 'Peters new contact']);
 
-        $this->assertNotNull($uu->get('contact_id'));
-        $this->assertSame('Peters new contact', $uu->ref('contact_id')->get('address'));
+        $this->assertNotNull($u->get('contact_id'));
+        $this->assertSame('Peters new contact', $u->ref('contact_id')->get('address'));
 
-        $uu->save()->reload();
-        $this->assertSame('Peters new contact', $uu->ref('contact_id')->get('address'));
-        $this->assertSame('Peters new contact', $uu->get('address'));
+        $u->save()->reload();
+        $this->assertSame('Peters new contact', $u->ref('contact_id')->get('address'));
+        $this->assertSame('Peters new contact', $u->get('address'));
     }
 
     /**

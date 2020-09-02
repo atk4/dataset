@@ -27,19 +27,19 @@ class PersistentSqlTest extends \atk4\schema\PhpunitTestCase
         $m->addField('name');
         $m->addField('surname');
 
-        $mm = (clone $m)->load(1);
-        $this->assertSame('John', $mm->get('name'));
+        $m->load(1);
+        $this->assertSame('John', $m->get('name'));
 
-        $mm = (clone $m)->load(2);
-        $this->assertSame('Jones', $mm->get('surname'));
-        $mm->set('surname', 'Smith');
-        $mm->save();
+        $m->load(2);
+        $this->assertSame('Jones', $m->get('surname'));
+        $m->set('surname', 'Smith');
+        $m->save();
 
-        $mm = (clone $m)->load(1);
-        $this->assertSame('John', $mm->get('name'));
+        $m->load(1);
+        $this->assertSame('John', $m->get('name'));
 
-        $mm = (clone $m)->load(2);
-        $this->assertSame('Smith', $mm->get('surname'));
+        $m->load(2);
+        $this->assertSame('Smith', $m->get('surname'));
     }
 
     public function testPersistenceInsert()
@@ -62,19 +62,19 @@ class PersistentSqlTest extends \atk4\schema\PhpunitTestCase
             $ids[] = $this->db->insert($m, $row);
         }
 
-        $mm = (clone $m)->load($ids[0]);
-        $this->assertSame('John', $mm->get('name'));
+        $m->load($ids[0]);
+        $this->assertSame('John', $m->get('name'));
 
-        $mm = (clone $m)->load($ids[1]);
-        $this->assertSame('Jones', $mm->get('surname'));
-        $mm->set('surname', 'Smith');
-        $mm->save();
+        $m->load($ids[1]);
+        $this->assertSame('Jones', $m->get('surname'));
+        $m->set('surname', 'Smith');
+        $m->save();
 
-        $mm = (clone $m)->load($ids[0]);
-        $this->assertSame('John', $mm->get('name'));
+        $m->load($ids[0]);
+        $this->assertSame('John', $m->get('name'));
 
-        $mm = (clone $m)->load($ids[1]);
-        $this->assertSame('Smith', $mm->get('surname'));
+        $m->load($ids[1]);
+        $this->assertSame('Smith', $m->get('surname'));
     }
 
     public function testModelInsert()
@@ -96,9 +96,9 @@ class PersistentSqlTest extends \atk4\schema\PhpunitTestCase
             $ms[] = $m->insert($row);
         }
 
-        $this->assertSame('John', (clone $m)->load($ms[0])->get('name'));
+        $this->assertSame('John', $m->load($ms[0])->get('name'));
 
-        $this->assertSame('Jones', (clone $m)->load($ms[1])->get('surname'));
+        $this->assertSame('Jones', $m->load($ms[1])->get('surname'));
     }
 
     public function testModelSaveNoReload()

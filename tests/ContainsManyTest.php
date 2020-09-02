@@ -247,9 +247,9 @@ class ContainsManyTest extends \atk4\schema\PhpunitTestCase
         }
 
         // add some discounts
-        (clone $l)->load(1)->ref('discounts')->insert(['id' => 1, 'percent' => 5, 'valid_till' => new \DateTime('2019-07-15')]);
-        (clone $l)->load(1)->ref('discounts')->insert(['id' => 2, 'percent' => 10, 'valid_till' => new \DateTime('2019-07-30')]);
-        (clone $l)->load(2)->ref('discounts')->insert(['id' => 1, 'percent' => 20, 'valid_till' => new \DateTime('2019-12-31')]);
+        $l->load(1)->ref('discounts')->insert(['id' => 1, 'percent' => 5, 'valid_till' => new \DateTime('2019-07-15')]);
+        $l->load(1)->ref('discounts')->insert(['id' => 2, 'percent' => 10, 'valid_till' => new \DateTime('2019-07-30')]);
+        $l->load(2)->ref('discounts')->insert(['id' => 1, 'percent' => 20, 'valid_till' => new \DateTime('2019-12-31')]);
 
         // reload invoice to be sure all is saved and to recalculate all fields
         $i->reload();

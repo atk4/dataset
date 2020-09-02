@@ -113,18 +113,14 @@ class CsvTest extends AtkPhpunit\TestCase
         $m = new Model($p);
         $m->addField('name');
         $m->addField('surname');
+        $m->loadAny();
+        $m->loadAny();
 
-        $mm = clone $m;
-        $mm->loadAny();
-        $mm = clone $m;
-        $mm->loadAny();
+        $this->assertSame('Sarah', $m->get('name'));
+        $this->assertSame('Jones', $m->get('surname'));
 
-        $this->assertSame('Sarah', $mm->get('name'));
-        $this->assertSame('Jones', $mm->get('surname'));
-
-        $mm = clone $m;
-        $mm->tryLoadAny();
-        $this->assertFalse($mm->loaded());
+        $m->tryLoadAny();
+        $this->assertFalse($m->loaded());
     }
 
     public function testPersistenceCopy()
