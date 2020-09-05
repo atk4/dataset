@@ -20,7 +20,23 @@ class Array_ extends Persistence
 
     public function __construct(array $data = [])
     {
-        $this->data = $data;
+        // if there is no model table specified, then create fake one named 'data'
+        // and put all data in there
+        foreach ($data as $rows) {
+            foreach ($rows as $row) {
+                if (!is_array($row)) {
+                    $data = ['data' => $data];
+
+                    break 2;
+                }
+            }
+        }
+
+        foreach ($data as $table => $rows) {
+            foreach ($rows as $id => $row) {
+                $this->_saveRow($row, $id, $table, 'id');
+            }
+        }
     }
 
     /**
@@ -57,18 +73,26 @@ class Array_ extends Persistence
         }
     }
 
+    private function _saveRow(array $row, $id, string $table, ?string $idColumnName): void
+    {
+        if ($idColumnName !== null && array_key_exists($idColumnName, $row)) {
+            $this->assertNoIdMismatch($row[$idColumnName], $id);
+            unset($row[$idColumnName]);
+        }
+
+        $this->data[$table][$id] = $row;
+    }
+
     private function saveRow(Model $model, array $row, $id, string $table): void
     {
         if ($model->id_field) {
             $idField = $model->getField($model->id_field);
             $idColumnName = $idField->actual ?? $idField->short_name;
-            if (array_key_exists($idColumnName, $row)) {
-                $this->assertNoIdMismatch($row[$idColumnName], $id);
-                unset($row[$idColumnName]);
-            }
+        } else {
+            $idColumnName = null;
         }
 
-        $this->data[$table][$id] = $row;
+        $this->_saveRow($row, $id, $table, $idColumnName);
     }
 
     private function addIdToLoadRow(Model $model, array &$row, $id): void
@@ -107,13 +131,9 @@ class Array_ extends Persistence
             }
         }
 
-        // if there is no model table specified, then create fake one named 'data'
-        // and put all persistence data in there
+        // if there is no model table specified, set it to 'data'
         if (!$model->table) {
-            $model->table = 'data'; // fake table name 'data'
-            if (!isset($this->data[$model->table]) || count($this->data) !== 1) {
-                $this->data = [$model->table => $this->data];
-            }
+            $model->table = 'data';
         }
 
         // if there is no such table in persistence, then create empty one
