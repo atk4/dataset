@@ -17,6 +17,6 @@ class Payment extends Document
         $j_p->addField('cheque_no');
         $j_p->hasOne('account_id', new Account());
 
-        $j_p->addField('misc_payment', ['type' => 'bool']);
+        $j_p->addField('misc_payment', ['type' => 'boolean']);
     }
 }

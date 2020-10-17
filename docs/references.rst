@@ -452,7 +452,7 @@ No condition will be applied by default so it's all up to you::
     $m->addRef('Archive', function($m) {
         $archive = $m->newInstance(null, ['table' => $m->table.'_archive']);
 
-        $m->addField('original_id', ['type' => 'int']);
+        $m->addField('original_id', ['type' => 'integer']);
 
         if ($m->loaded)) {
             $archive->addCondition('original_id', $m->getId());

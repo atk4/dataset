@@ -265,7 +265,7 @@ class Field implements Expressionable
 //            // POC only - we still need to solve unsigned, not null, see how Doctrine handle Type options
 //            // then all code below should not be needed
 //            $platform = new \Doctrine\DBAL\Platforms\MySqlPlatform(); // should be provided by a Persistence (and DSQL Connection)
-//            $type = $this->getTypeObject();
+            $type = $this->getTypeObject();
 //
 //            return $type->convertToPHPValue($type->convertToDatabaseValue($value, $platform));
 
@@ -405,13 +405,6 @@ class Field implements Expressionable
                 if (!is_object($value)) {
                     throw new ValidationException([$this->name => 'Must be an object']);
                 }
-
-                break;
-            case 'int':
-            case 'str':
-            case 'bool':
-                throw (new Exception('Use of obsolete field type abbreviation. Use "integer", "string", "boolean" etc.'))
-                    ->addMoreInfo('type', $f->type);
 
                 break;
             }

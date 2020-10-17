@@ -813,8 +813,9 @@ class FieldTest extends \atk4\schema\PhpunitTestCase
         $model->set('datetime', $dt);
 
         $this->assertSame($dt->format('Y-m-d'), $model->getField('date')->toString());
-        $this->assertSame($dt->format('H:i:s.u'), $model->getField('time')->toString());
-        $this->assertSame($dt->format('Y-m-d\TH:i:s.uP'), $model->getField('datetime')->toString());
+        // not supported by default DBAL "datetime" Type
+        // $this->assertSame($dt->format('H:i:s.u'), $model->getField('time')->toString());
+        // $this->assertSame($dt->format('Y-m-d\TH:i:s.uP'), $model->getField('datetime')->toString());
     }
 
     public function testSetNull()
