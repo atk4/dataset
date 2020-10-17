@@ -71,7 +71,7 @@ class HasOneSql extends HasOne
                 $theirModel = $this->createTheirModel();
 
                 $theirModel->addCondition($theirFieldName, $ourModel->get($ourFieldName));
-                $ourModel->set($this->getOurFieldName(), $theirModel->action('field', [$theirModel->id_field]));
+                $ourModel->set($this->getOurFieldName(), $theirModel->action('field', [$theirModel->id_field])->getOne());
                 $ourModel->_unset($ourFieldName);
             }
         }, [], 21);
@@ -212,7 +212,7 @@ class HasOneSql extends HasOne
                 $theirModel = $this->createTheirModel();
 
                 $theirModel->addCondition($theirModel->title_field, $ourModel->get($fieldName));
-                $ourModel->set($this->getOurFieldName(), $theirModel->action('field', [$theirModel->id_field]));
+                $ourModel->set($this->getOurFieldName(), $theirModel->action('field', [$theirModel->id_field])->getOne());
             }
         }, [], 20);
 
