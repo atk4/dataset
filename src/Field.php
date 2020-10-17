@@ -262,12 +262,9 @@ class Field implements Expressionable
 
             $f = $this;
 
-//            // POC only - we still need to solve unsigned, not null, see how Doctrine handle Type options
-//            // then all code below should not be needed
-//            $platform = new \Doctrine\DBAL\Platforms\MySqlPlatform(); // should be provided by a Persistence (and DSQL Connection)
+//            $platform = $this->getDatabasePlatform();
             $type = $this->getTypeObject();
-//
-//            return $type->convertToPHPValue($type->convertToDatabaseValue($value, $platform));
+//            TODO - breaking tests$value = $type->convertToPHPValue($type->convertToDatabaseValue($value, $platform), $platform);
 
             // only string type fields can use empty string as legit value, for all
             // other field types empty value is the same as no-value, nothing or null
