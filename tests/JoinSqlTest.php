@@ -145,10 +145,6 @@ class JoinSqlTest extends \atk4\schema\PhpunitTestCase
 
         $this->db->connection->dsql()->table('contact')->where('id', 2)->delete();
 
-        if ($this->getDatabasePlatform() instanceof OraclePlatform) { // TODO
-            $this->markTestIncomplete('TODO - for some reasons, result below has one different key');
-        }
-
         $m_u2->unload();
         $m_u2 = clone $m_u;
         $m_u2->set('name', 'Sue');
