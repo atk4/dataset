@@ -1571,9 +1571,6 @@ class Model implements \IteratorAggregate
                 }
 
                 // Collect all data of a new record
-                if ($data['id'] === null) {
-                    unset($data['id']);
-                }
                 $id = $this->persistence->insert($this, $data);
 
                 if (!$this->id_field) {
