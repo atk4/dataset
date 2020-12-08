@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests\Model\Smbo;
+namespace Atk4\Data\Tests\Model\Smbo;
 
-class Account extends \atk4\data\Model
+class Account extends \Atk4\Data\Model
 {
     public $table = 'account';
 

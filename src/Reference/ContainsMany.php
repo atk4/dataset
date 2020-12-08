@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Reference;
+namespace Atk4\Data\Reference;
 
-use atk4\data\Model;
-use atk4\data\Persistence;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
 
 /**
  * ContainsMany reference.

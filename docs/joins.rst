@@ -1,7 +1,7 @@
 
 .. _Joins:
 
-.. php:namespace:: atk4\data\Model
+.. php:namespace:: Atk4\Data\Model
 
 =================================
 Model from multiple joined tables
@@ -276,7 +276,7 @@ Implementation Details
 Specifying complex ON logic
 ---------------------------
 
-When you're dealing with SQL drivers, you can specify `\\atk4\\dsql\\Expression` for your
+When you're dealing with SQL drivers, you can specify `\\Atk4\\Dsql\\Expression` for your
 "on" clause::
 
     $stats = $user->join('stats', [

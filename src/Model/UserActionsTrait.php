@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Model;
+namespace Atk4\Data\Model;
 
-use atk4\core\Factory;
-use atk4\data\Model;
+use Atk4\Core\Factory;
+use Atk4\Data\Model;
 
 trait UserActionsTrait
 {
@@ -93,8 +93,6 @@ trait UserActionsTrait
 
     /**
      * Remove specified action(s).
-     *
-     * @param string|array $name
      *
      * @return $this
      */

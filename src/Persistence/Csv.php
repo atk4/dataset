@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Persistence;
+namespace Atk4\Data\Persistence;
 
-use atk4\data\Exception;
-use atk4\data\Model;
-use atk4\data\Persistence;
+use Atk4\Data\Exception;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
 
 /**
  * Implements persistence driver that can save data and load from CSV file.
@@ -366,23 +366,7 @@ class Csv extends Persistence
      */
     public function generateNewId(Model $model, string $table = null)
     {
-        if ($table === null) {
-            $table = $model->table;
-        }
-
-        $ids = array_keys($this->data[$table]);
-
-        $type = $model->getField($model->id_field)->type;
-
-        switch ($type) {
-            case 'integer':
-                return count($ids) === 0 ? 1 : (max($ids) + 1);
-            case 'string':
-                return uniqid();
-            default:
-                throw (new Exception('Unsupported id field type. Array supports type=integer or type=string only'))
-                    ->addMoreInfo('type', $type);
-        }
+        throw new Exception('Not implemented');
     }
 
     /**

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace atk4\data;
+namespace Atk4\Data;
 
 /**
  * Class description?

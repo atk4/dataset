@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\data\Exception;
-use atk4\data\Model;
-use atk4\data\Persistence;
+use Atk4\Data\Exception;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
 use Doctrine\DBAL\Platforms\OraclePlatform;
-use Doctrine\DBAL\Platforms\PostgreSQLPlatform;
-use Doctrine\DBAL\Platforms\SQLServerPlatform;
+use Doctrine\DBAL\Platforms\PostgreSQL94Platform;
+use Doctrine\DBAL\Platforms\SQLServer2012Platform;
 
 /**
- * @coversDefaultClass \atk4\data\Model
+ * @coversDefaultClass \Atk4\Data\Model
  */
-class JoinSqlTest extends \atk4\schema\PhpunitTestCase
+class JoinSqlTest extends \Atk4\Schema\PhpunitTestCase
 {
     public function testDirection()
     {
@@ -58,7 +58,7 @@ class JoinSqlTest extends \atk4\schema\PhpunitTestCase
 
     public function testJoinSaving1()
     {
-        if ($this->getDatabasePlatform() instanceof PostgreSQLPlatform || $this->getDatabasePlatform() instanceof SQLServerPlatform || $this->getDatabasePlatform() instanceof OraclePlatform) {
+        if ($this->getDatabasePlatform() instanceof PostgreSQL94Platform || $this->getDatabasePlatform() instanceof SQLServer2012Platform || $this->getDatabasePlatform() instanceof OraclePlatform) {
             $this->markTestIncomplete('TODO - NULL PK not unset in INSERT');
         }
 
@@ -168,7 +168,7 @@ class JoinSqlTest extends \atk4\schema\PhpunitTestCase
 
     public function testJoinSaving3()
     {
-        if ($this->getDatabasePlatform() instanceof PostgreSQLPlatform || $this->getDatabasePlatform() instanceof SQLServerPlatform || $this->getDatabasePlatform() instanceof OraclePlatform) {
+        if ($this->getDatabasePlatform() instanceof PostgreSQL94Platform || $this->getDatabasePlatform() instanceof SQLServer2012Platform || $this->getDatabasePlatform() instanceof OraclePlatform) {
             $this->markTestIncomplete('TODO - NULL PK not unset in INSERT');
         }
 
@@ -234,7 +234,7 @@ class JoinSqlTest extends \atk4\schema\PhpunitTestCase
 
     public function testJoinUpdate()
     {
-        if ($this->getDatabasePlatform() instanceof PostgreSQLPlatform || $this->getDatabasePlatform() instanceof SQLServerPlatform || $this->getDatabasePlatform() instanceof OraclePlatform) {
+        if ($this->getDatabasePlatform() instanceof PostgreSQL94Platform || $this->getDatabasePlatform() instanceof SQLServer2012Platform || $this->getDatabasePlatform() instanceof OraclePlatform) {
             $this->markTestIncomplete('TODO - NULL PK not unset in INSERT');
         }
 
@@ -408,7 +408,7 @@ class JoinSqlTest extends \atk4\schema\PhpunitTestCase
 
     public function testDoubleJoin()
     {
-        if ($this->getDatabasePlatform() instanceof PostgreSQLPlatform || $this->getDatabasePlatform() instanceof SQLServerPlatform || $this->getDatabasePlatform() instanceof OraclePlatform) {
+        if ($this->getDatabasePlatform() instanceof PostgreSQL94Platform || $this->getDatabasePlatform() instanceof SQLServer2012Platform || $this->getDatabasePlatform() instanceof OraclePlatform) {
             $this->markTestIncomplete('TODO - NULL PK not unset in INSERT');
         }
 

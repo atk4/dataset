@@ -31,7 +31,7 @@ Associating with Persistence
 
 Create your persistence object first::
 
-    $db = \atk4\data\Persistence::connect($dsn);
+    $db = \Atk4\Data\Persistence::connect($dsn);
 
 There are several ways to link your model up with the persistence::
 
@@ -799,7 +799,7 @@ you can implement it like this::
         $_SESSION['ad'] = []; // initialize
     }
 
-    $sess = new \atk4\data\Persistence\Array_($_SESSION['ad']);
+    $sess = new \Atk4\Data\Persistence\Array_($_SESSION['ad']);
     $logged_user = new User($sess);
     $logged_user->load('active_user');
 

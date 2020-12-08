@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace atk4\schema\tests;
+namespace Atk4\Schema\Tests;
 
-use atk4\schema\PhpunitTestCase;
+use Atk4\Schema\PhpunitTestCase;
 
 class BasicTest extends PhpunitTestCase
 {

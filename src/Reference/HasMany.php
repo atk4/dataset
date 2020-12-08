@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Reference;
+namespace Atk4\Data\Reference;
 
-use atk4\data\Exception;
-use atk4\data\Field;
-use atk4\data\Model;
-use atk4\data\Reference;
+use Atk4\Data\Exception;
+use Atk4\Data\Field;
+use Atk4\Data\Model;
+use Atk4\Data\Reference;
 
 /**
  * Reference\HasMany class.
@@ -113,7 +113,7 @@ class HasMany extends Reference
                 return $this->refLink()->action('field', [$defaults['aggregate'], 'alias' => $alias]);
             };
         } elseif ($defaults['aggregate'] === 'count' && !isset($defaults['field'])) {
-            $fx = function () use ($defaults, $alias) {
+            $fx = function () use ($alias) {
                 return $this->refLink()->action('count', ['alias' => $alias]);
             };
         } elseif (in_array($defaults['aggregate'], ['sum', 'avg', 'min', 'max', 'count'], true)) {

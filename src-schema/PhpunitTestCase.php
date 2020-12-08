@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
-namespace atk4\schema;
+namespace Atk4\Schema;
 
-use atk4\core\AtkPhpunit;
-use atk4\data\Model;
-use atk4\data\Persistence;
+use Atk4\Core\AtkPhpunit;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
 use Doctrine\DBAL\Logging\SQLLogger;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
+use Doctrine\DBAL\Platforms\MySQLPlatform;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
 
-// NOTE: This class should stay here in this namespace because other repos rely on it. For example, atk4\data tests
+// NOTE: This class should stay here in this namespace because other repos rely on it. For example, Atk4\Data tests
 class PhpunitTestCase extends AtkPhpunit\TestCase
 {
     /** @var Persistence|Persistence\Sql Persistence instance */
@@ -110,7 +111,7 @@ class PhpunitTestCase extends AtkPhpunit\TestCase
 
     public function getMigrator(Model $model = null): Migration
     {
-        return new \atk4\schema\Migration($model ?: $this->db);
+        return new \Atk4\Schema\Migration($model ?: $this->db);
     }
 
     /**

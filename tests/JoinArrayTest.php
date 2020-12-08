@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\core\AtkPhpunit;
-use atk4\data\Exception;
-use atk4\data\Model;
-use atk4\data\Persistence;
+use Atk4\Core\AtkPhpunit;
+use Atk4\Data\Exception;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
 
 /**
- * @coversDefaultClass \atk4\data\Model
+ * @coversDefaultClass \Atk4\Data\Model
  */
 class JoinArrayTest extends AtkPhpunit\TestCase
 {

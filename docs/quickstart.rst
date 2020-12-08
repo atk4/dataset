@@ -46,7 +46,7 @@ Console is using `Psysh <http://psysh.org>`_ to help you interact with objects
 like this::
 
     > $db
-    => atk4\data\Persistence\Sql {...}
+    => Atk4\Data\Persistence\Sql {...}
 
     > exit
 
@@ -133,7 +133,7 @@ to do so.
 It might be handy to use in-line definition of a model. Try the following
 inside console::
 
-    $m = new \atk4\data\Model($db, 'contact_info');
+    $m = new \Atk4\Data\Model($db, 'contact_info');
     $m->addFields(['address_1','address_2']);
     $m->addCondition('address_1', 'not', null);
     $m->loadAny();
@@ -143,7 +143,7 @@ inside console::
 Next, exit and create file `src/Model_ContactInfo.php`::
 
     <?php
-    class Model_ContactInfo extends \atk4\data\Model
+    class Model_ContactInfo extends \Atk4\Data\Model
     {
         public $table = 'contact_info';
         function init(): void
@@ -200,7 +200,7 @@ it cannot be removed for safety reasons.
 Suppose you have a method that converts DataSet into JSON. Ability to add
 conditions is your way to specify which records to operate on::
 
-    function myexport(\atk4\data\Model $m, $fields)
+    function myexport(\Atk4\Data\Model $m, $fields)
     {
         return json_encode($m->export($fields));
     }
@@ -272,7 +272,7 @@ It's time to create the first Model. Open `src/Model_User.php` which should look
 like this::
 
     <?php
-    class Model_User extends \atk4\data\Model
+    class Model_User extends \Atk4\Data\Model
     {
         public $table = 'user';
 
@@ -379,7 +379,7 @@ Understanding Persistence
 To make things simple, console has already created persistence inside variable
 `$db`. Load up `console.php` in your editor to look at how persistence is set up::
 
-    $app->db = \atk4\data\Persistence::connect($dsn, $user, $pass);
+    $app->db = \Atk4\Data\Persistence::connect($dsn, $user, $pass);
 
 The `$dsn` can also be using the PEAR-style DSN format, such as:
 "mysql://user:pass@db/host", in which case you do not need to specify $user and $pass.
@@ -390,8 +390,8 @@ For some persistence classes, you should use constructor directly::
     $array[1] = ['name'=>'John'];
     $array[2] = ['name'=>'Peter'];
 
-    $db = new \atk4\data\Persistence\Array_($array);
-    $m = new \atk4\data\Model($db);
+    $db = new \Atk4\Data\Persistence\Array_($array);
+    $m = new \Atk4\Data\Model($db);
     $m->addField('name');
     $m->load(2);
     echo $m->get('name');  // Peter
@@ -400,7 +400,7 @@ There are several Persistence classes that deal with different data sources.
 Lets load up our console and try out a different persistence::
 
     $a=['user'=>[],'contact_info'=>[]];
-    $ar = new \atk4\data\Persistence\Array_($a);
+    $ar = new \Atk4\Data\Persistence\Array_($a);
     $m = new Model_User($ar);
     $m->set('username', 'test');
     $m->set('address_1', 'street');

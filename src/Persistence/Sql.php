@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Persistence;
+namespace Atk4\Data\Persistence;
 
-use atk4\data\Exception;
-use atk4\data\Field;
-use atk4\data\FieldSqlExpression;
-use atk4\data\Model;
-use atk4\data\Persistence;
-use atk4\dsql\Connection;
-use atk4\dsql\Exception as DsqlException;
-use atk4\dsql\Expression;
-use atk4\dsql\Query;
+use Atk4\Data\Exception;
+use Atk4\Data\Field;
+use Atk4\Data\FieldSqlExpression;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
+use Atk4\Dsql\Connection;
+use Atk4\Dsql\Exception as DsqlException;
+use Atk4\Dsql\Expression;
+use Atk4\Dsql\Query;
 use Doctrine\DBAL\Platforms;
 
 class Sql extends Persistence
@@ -33,7 +33,7 @@ class Sql extends Persistence
     /**
      * Connection object.
      *
-     * @var \atk4\dsql\Connection
+     * @var \Atk4\Dsql\Connection
      */
     public $connection;
 
@@ -42,21 +42,21 @@ class Sql extends Persistence
      *
      * @var string
      */
-    public $_default_seed_addField = [\atk4\data\FieldSql::class];
+    public $_default_seed_addField = [\Atk4\Data\FieldSql::class];
 
     /**
      * Default class when adding hasOne field.
      *
      * @var string
      */
-    public $_default_seed_hasOne = [\atk4\data\Reference\HasOneSql::class];
+    public $_default_seed_hasOne = [\Atk4\Data\Reference\HasOneSql::class];
 
     /**
      * Default class when adding hasMany field.
      *
      * @var string
      */
-    public $_default_seed_hasMany; // [\atk4\data\Reference\HasMany::class];
+    public $_default_seed_hasMany; // [\Atk4\Data\Reference\HasMany::class];
 
     /**
      * Default class when adding Expression field.
@@ -82,19 +82,19 @@ class Sql extends Persistence
      */
     public function __construct($connection, $user = null, $password = null, $args = [])
     {
-        if ($connection instanceof \atk4\dsql\Connection) {
+        if ($connection instanceof \Atk4\Dsql\Connection) {
             $this->connection = $connection;
 
             return;
         }
 
         if (is_object($connection)) {
-            throw (new Exception('You can only use Persistance_SQL with Connection class from atk4\dsql'))
+            throw (new Exception('You can only use Persistance_SQL with Connection class from Atk4\Dsql'))
                 ->addMoreInfo('connection', $connection);
         }
 
         // attempt to connect.
-        $this->connection = \atk4\dsql\Connection::connect(
+        $this->connection = \Atk4\Dsql\Connection::connect(
             $connection,
             $user,
             $password,
@@ -834,9 +834,9 @@ class Sql extends Persistence
      */
     public function prepareIterator(Model $model): iterable
     {
-        try {
-            $export = $model->action('select');
+        $export = $model->action('select');
 
+        try {
             return $export->getIterator();
         } catch (DsqlException $e) {
             throw (new Exception('Unable to execute iteration query', 0, $e))
@@ -958,7 +958,7 @@ class Sql extends Persistence
         if ($sequenceName === null) {
             // PostgreSQL uses sequence internally for PK autoincrement,
             // use default name if not set explicitly
-            if ($this->connection instanceof \atk4\dsql\Postgresql\Connection) {
+            if ($this->connection instanceof \Atk4\Dsql\Postgresql\Connection) {
                 $sequenceName = $model->table . '_' . $model->id_field . '_seq';
             }
         }
@@ -970,7 +970,7 @@ class Sql extends Persistence
     {
         // TODO: Oracle does not support lastInsertId(), only for testing
         // as this does not support concurrent inserts
-        if ($this->connection instanceof \atk4\dsql\Oracle\Connection) {
+        if ($this->connection instanceof \Atk4\Dsql\Oracle\Connection) {
             if ($model->id_field === false) {
                 return ''; // TODO code should never call lastInsertId() if id field is not defined
             }
@@ -987,7 +987,7 @@ class Sql extends Persistence
     protected function syncIdSequence(Model $model): void
     {
         // PostgreSQL sequence must be manually synchronized if a row with explicit ID was inserted
-        if ($this->connection instanceof \atk4\dsql\Postgresql\Connection) {
+        if ($this->connection instanceof \Atk4\Dsql\Postgresql\Connection) {
             $this->connection->expr(
                 'select setval([], coalesce(max({}), 0) + 1, false) from {}',
                 [$this->getIdSequenceName($model), $model->id_field, $model->table]

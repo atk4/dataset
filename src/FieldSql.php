@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace atk4\data;
+namespace Atk4\Data;
 
-use atk4\dsql\Expression;
-use atk4\dsql\Expressionable;
+use Atk4\Dsql\Expression;
+use Atk4\Dsql\Expressionable;
 
 /**
  * Class description?

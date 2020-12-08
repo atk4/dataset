@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\data\Model;
-use atk4\data\Util\DeepCopy;
-use atk4\data\Util\DeepCopyException;
-use Doctrine\DBAL\Platforms\SQLServerPlatform;
+use Atk4\Data\Model;
+use Atk4\Data\Util\DeepCopy;
+use Atk4\Data\Util\DeepCopyException;
+use Doctrine\DBAL\Platforms\SQLServer2012Platform;
 
 class DcClient extends Model
 {
@@ -137,7 +137,7 @@ class DcPayment extends Model
 /**
  * Implements various tests for deep copying objects.
  */
-class DeepCopyTest extends \atk4\schema\PhpunitTestCase
+class DeepCopyTest extends \Atk4\Schema\PhpunitTestCase
 {
     protected function setUp(): void
     {
@@ -246,7 +246,7 @@ class DeepCopyTest extends \atk4\schema\PhpunitTestCase
         $this->assertEquals(1, $client3->ref('Quotes')->action('count')->getOne());
         $this->assertEquals(1, $client3->ref('Payments')->action('count')->getOne());
 
-        if ($this->getDatabasePlatform() instanceof SQLServerPlatform) {
+        if ($this->getDatabasePlatform() instanceof SQLServer2012Platform) {
             $this->markTestIncomplete('TODO - MSSQL: Cannot perform an aggregate function on an expression containing an aggregate or a subquery.');
         }
 
@@ -280,7 +280,7 @@ class DeepCopyTest extends \atk4\schema\PhpunitTestCase
         $invoice = new DcInvoice();
         $invoice->onHook(DeepCopy::HOOK_AFTER_COPY, static function ($m) {
             if (!$m->get('ref')) {
-                throw new \atk4\core\Exception('no ref');
+                throw new \Atk4\Core\Exception('no ref');
             }
         });
 
@@ -321,7 +321,7 @@ class DeepCopyTest extends \atk4\schema\PhpunitTestCase
         $invoice = new DcInvoice();
         $invoice->onHook(DeepCopy::HOOK_AFTER_COPY, static function ($m) {
             if (!$m->get('ref')) {
-                throw new \atk4\core\Exception('no ref');
+                throw new \Atk4\Core\Exception('no ref');
             }
         });
 
@@ -339,7 +339,7 @@ class DeepCopyTest extends \atk4\schema\PhpunitTestCase
                 ->to($invoice)
                 ->with(['Lines'])
                 ->copy();
-        } catch (\atk4\data\Util\DeepCopyException $e) {
+        } catch (\Atk4\Data\Util\DeepCopyException $e) {
             $this->assertSame('Mandatory field value cannot be null', $e->getPrevious()->getMessage());
 
             throw $e;

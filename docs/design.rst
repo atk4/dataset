@@ -133,13 +133,13 @@ Remember that it had nothing to do with your database structure, right?
 
 A code to declare a model::
 
-    class Model_User extends \atk4\data\Model { }
+    class Model_User extends \Atk4\Data\Model { }
 
     class Model_Client extends Model_User { }
 
     class Model_Admin extends Model_User { }
 
-    class Model_Order extends \atk4\data\Model { }
+    class Model_Order extends \Atk4\Data\Model { }
 
 Domain Model Methods
 --------------------
@@ -201,7 +201,7 @@ behavior.
 
 Code to declare fields::
 
-    class Model_Order extends \atk4\data\Model {
+    class Model_Order extends \Atk4\Data\Model {
         protected function init(): void {
             parent::init();
 
@@ -240,7 +240,7 @@ Code (add inside `init()`)::
         }
     }
 
-    class Model_Order extends \atk4\data\Model {
+    class Model_Order extends \Atk4\Data\Model {
         protected function init(): void {
             parent::init();
 
@@ -311,7 +311,7 @@ This is, however, a good point for you to write the initial batch of the code.
 
 Code::
 
-    class Model_User extends \atk4\data\Model {
+    class Model_User extends \Atk4\Data\Model {
         protected function init(): void {
             parent::init();
 
@@ -331,7 +331,7 @@ Persistence Hooks
 Hooks can help you perform operations when object is being persisted::
 
 
-    class Model_User extends \atk4\data\Model {
+    class Model_User extends \Atk4\Data\Model {
         protected function init(): void {
             parent::init();
 
@@ -491,7 +491,7 @@ While with MongoDB, the query could be different::
 
 Finally the code above will work even if you use a simple Array as a data source::
 
-    $db = new \atk4\data\Persistence\Array_([
+    $db = new \Atk4\Data\Persistence\Array_([
         'client'=>[
             [
                 'name'=>'Joe',
@@ -516,7 +516,7 @@ So getting back to the operation above, lets look at it in more details::
 
 While "vip_orders" is actually a DataSet, executing count() will cross you over
 into persistence layer. However this method is returning a new object, which is then
-executed when you call getOne(). For SQL persistences it returns \atk4\dsql\Query
+executed when you call getOne(). For SQL persistences it returns \Atk4\Dsql\Query
 object, for example.
 
 Even though for a brief moment you had your hands on a "database-vendor specific"

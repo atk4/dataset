@@ -1,5 +1,5 @@
 
-.. php:namespace:: atk4\data\Field
+.. php:namespace:: Atk4\Data\Field
 
 .. php:class:: Boolean
 

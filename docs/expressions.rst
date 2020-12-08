@@ -114,7 +114,7 @@ might be out of sync and you might need your SQL to recalculate those expression
 To simplify your life, Agile Data implements smart model reloading. Consider
 the following model::
 
-    class Model_Math extends \atk4\data\Model
+    class Model_Math extends \Atk4\Data\Model
     {
         public $table = 'math';
         function init(): void
@@ -162,7 +162,7 @@ is another scenario when your database defines default fields:
 
 Then try the following code::
 
-    class Model_Math extends \atk4\data\Model
+    class Model_Math extends \Atk4\Data\Model
     {
         public $table = 'math';
         function init(): void

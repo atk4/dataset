@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Field;
+namespace Atk4\Data\Field;
 
-use atk4\core\InitializerTrait;
-use atk4\data\ValidationException;
+use Atk4\Core\InitializerTrait;
+use Atk4\Data\ValidationException;
 
 /**
  * Your favorite nullable binary type.
  */
-class Boolean extends \atk4\data\Field
+class Boolean extends \Atk4\Data\Field
 {
     use InitializerTrait {
         init as _init;

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Model;
+namespace Atk4\Data\Model;
 
 /**
  * Trait to add array like support to Model, example usage:
- * class CustomModel extends \atk4\data\Model implements \ArrayAccess
+ * class CustomModel extends \Atk4\Data\Model implements \ArrayAccess
  * {
- *     use \atk4\data\Model\ArrayAccessTrait;
+ *     use \Atk4\Data\Model\ArrayAccessTrait;
  * }.
  */
 trait ArrayAccessTrait

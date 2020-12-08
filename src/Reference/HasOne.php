@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Reference;
+namespace Atk4\Data\Reference;
 
-use atk4\data\Field;
-use atk4\data\Model;
-use atk4\data\Reference;
+use Atk4\Data\Field;
+use Atk4\Data\Model;
+use Atk4\Data\Reference;
 
 /**
  * Reference\HasOne class.

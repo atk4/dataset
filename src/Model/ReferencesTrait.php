@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Model;
+namespace Atk4\Data\Model;
 
-use atk4\data\Exception;
-use atk4\data\Reference;
+use Atk4\Data\Exception;
+use Atk4\Data\Reference;
 
 /**
  * Provides native Model methods for manipulating model references.
@@ -137,7 +137,7 @@ trait ReferencesTrait
      *
      * @param array $defaults
      *
-     * @return \atk4\data\Model
+     * @return \Atk4\Data\Model
      */
     public function ref(string $link, $defaults = []): self
     {
@@ -149,7 +149,7 @@ trait ReferencesTrait
      *
      * @param array $defaults
      *
-     * @return \atk4\data\Model
+     * @return \Atk4\Data\Model
      */
     public function refModel(string $link, $defaults = []): self
     {
@@ -161,7 +161,7 @@ trait ReferencesTrait
      *
      * @param array $defaults
      *
-     * @return \atk4\data\Model
+     * @return \Atk4\Data\Model
      */
     public function refLink(string $link, $defaults = []): self
     {

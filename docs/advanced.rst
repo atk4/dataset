@@ -134,11 +134,11 @@ To implement the above, I'll create a new class::
 
     class Controller_Audit {
 
-        use \atk4\core\InitializerTrait {
+        use \Atk4\Core\InitializerTrait {
             init as _init;
         }
-        use \atk4\core\TrackableTrait;
-        use \atk4\core\AppScopeTrait;
+        use \Atk4\Core\TrackableTrait;
+        use \Atk4\Core\AppScopeTrait;
 
     }
 
@@ -215,10 +215,10 @@ Start by creating a class::
 
     class Controller_SoftDelete {
 
-        use \atk4\core\InitializerTrait {
+        use \Atk4\Core\InitializerTrait {
             init as _init;
         }
-        use \atk4\core\TrackableTrait;
+        use \Atk4\Core\TrackableTrait;
 
         function init(): void {
             $this->_init();
@@ -240,7 +240,7 @@ Start by creating a class::
 
         function softDelete($m) {
             if (!$m->loaded()) {
-                throw (new \atk4\core\Exception('Model must be loaded before soft-deleting'))->addMoreInfo('model', $m);
+                throw (new \Atk4\Core\Exception('Model must be loaded before soft-deleting'))->addMoreInfo('model', $m);
             }
 
             $id = $m->getId();
@@ -259,7 +259,7 @@ Start by creating a class::
 
         function restore($m) {
             if (!$m->loaded()) {
-                throw (new \atk4\core\Exception(['Model must be loaded before restoring'))->addMoreInfo('model', $m);
+                throw (new \Atk4\Core\Exception(['Model must be loaded before restoring'))->addMoreInfo('model', $m);
             }
 
             $id = $m->getId();
@@ -324,10 +324,10 @@ before and just slightly modifying it::
 
     class Controller_SoftDelete {
 
-        use \atk4\core\InitializerTrait {
+        use \Atk4\Core\InitializerTrait {
             init as _init;
         }
-        use \atk4\core\TrackableTrait;
+        use \Atk4\Core\TrackableTrait;
 
         function init(): void {
             $this->_init();
@@ -349,7 +349,7 @@ before and just slightly modifying it::
 
         function softDelete(Model $m) {
             if (!$m->loaded()) {
-                throw (new \atk4\core\Exception('Model must be loaded before soft-deleting'))->addMoreInfo('model', $m);
+                throw (new \Atk4\Core\Exception('Model must be loaded before soft-deleting'))->addMoreInfo('model', $m);
             }
 
             $id = $m->getId();
@@ -366,7 +366,7 @@ before and just slightly modifying it::
 
         function restore($m) {
             if (!$m->loaded()) {
-                throw (new \atk4\core\Exception('Model must be loaded before restoring'))->addMoreInfo('model', $m);
+                throw (new \Atk4\Core\Exception('Model must be loaded before restoring'))->addMoreInfo('model', $m);
             }
 
             $id = $m->getId();
@@ -410,10 +410,10 @@ With Agile Data you can create controller that will ensure that certain fields
 inside your model are unique::
 
     class Controller_UniqueFields {
-        use \atk4\core\InitializerTrait {
+        use \Atk4\Core\InitializerTrait {
             init as _init;
         }
-        use \atk4\core\TrackableTrait;
+        use \Atk4\Core\TrackableTrait;
 
         protected $fields = null;
 
@@ -437,7 +437,7 @@ inside your model are unique::
                     $mm->tryLoadBy($field, $m->get($field));
 
                     if ($mm->loaded()) {
-                        throw (new \atk4\core\Exception('Duplicate record exists'))
+                        throw (new \Atk4\Core\Exception('Duplicate record exists'))
                             ->addMoreInfo('field', $field)
                             ->addMoreInfo('value', $m->get($field));
                     }
@@ -492,7 +492,7 @@ Here is what I need to do:
 
 Create new Model::
 
-    class Model_InvoicePayment extends \atk4\data\Model {
+    class Model_InvoicePayment extends \Atk4\Data\Model {
         public $table='invoice_payment';
         function init(): void
         {
@@ -607,7 +607,7 @@ adding invoice, I want to make it possible to specify 'Category' through the
 name, not only category_id. First, let me illustrate how can I do that with
 category_id::
 
-    class Model_Invoice extends \atk4\data\Model {
+    class Model_Invoice extends \Atk4\Data\Model {
         function init(): void {
 
             parent::init();

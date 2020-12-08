@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace atk4\data;
+namespace Atk4\Data;
 
-use atk4\core\Factory;
+use Atk4\Core\Factory;
 use Doctrine\DBAL\Platforms;
 
 class Persistence
 {
-    use \atk4\core\ContainerTrait {
+    use \Atk4\Core\ContainerTrait {
         add as _add;
     }
-    use \atk4\core\HookTrait;
-    use \atk4\core\DynamicMethodTrait;
-    use \atk4\core\NameTrait;
-    use \atk4\core\DiContainerTrait;
+    use \Atk4\Core\HookTrait;
+    use \Atk4\Core\DynamicMethodTrait;
+    use \Atk4\Core\NameTrait;
+    use \Atk4\Core\DiContainerTrait;
 
     /** @const string */
     public const HOOK_AFTER_ADD = self::class . '@afterAdd';
@@ -29,7 +29,7 @@ class Persistence
     public static function connect($dsn, string $user = null, string $password = null, array $args = []): self
     {
         // parse DSN string
-        $dsn = \atk4\dsql\Connection::normalizeDsn($dsn, $user, $password);
+        $dsn = \Atk4\Dsql\Connection::normalizeDsn($dsn, $user, $password);
 
         switch ($dsn['driverSchema']) {
             case 'mysql':
@@ -46,7 +46,7 @@ class Persistence
             case 'pgsql':
             case 'sqlsrv':
             case 'sqlite':
-                $db = new \atk4\data\Persistence\Sql($dsn['dsn'], $dsn['user'], $dsn['pass'], $args);
+                $db = new \Atk4\Data\Persistence\Sql($dsn['dsn'], $dsn['user'], $dsn['pass'], $args);
 
                 return $db;
             default:
@@ -155,8 +155,8 @@ class Persistence
 
             // Expression and null cannot be converted.
             if (
-                $value instanceof \atk4\dsql\Expression ||
-                $value instanceof \atk4\dsql\Expressionable ||
+                $value instanceof \Atk4\Dsql\Expression ||
+                $value instanceof \Atk4\Dsql\Expressionable ||
                 $value === null
             ) {
                 $result[$field->getPersistenceName()] = $value;

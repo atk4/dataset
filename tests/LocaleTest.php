@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\core\AtkPhpunit;
-use atk4\core\Translator\Translator;
-use atk4\data\Exception;
-use atk4\data\Locale;
-use atk4\data\Model;
-use atk4\data\Persistence;
+use Atk4\Core\AtkPhpunit;
+use Atk4\Core\Translator\Translator;
+use Atk4\Data\Exception;
+use Atk4\Data\Locale;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
 
 class LocaleTest extends AtkPhpunit\TestCase
 {

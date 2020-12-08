@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests\Model;
+namespace Atk4\Data\Tests\Model;
 
-use atk4\data\Model;
+use Atk4\Data\Model;
 
 class User extends Model
 {

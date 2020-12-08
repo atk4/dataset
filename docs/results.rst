@@ -16,7 +16,7 @@ Iterate through model data
 
 Create your persistence object first then iterate it::
 
-    $db = \atk4\data\Persistence::connect($dsn);
+    $db = \Atk4\Data\Persistence::connect($dsn);
     $m = new Model_Client($db);
 
     foreach($m as $id => $item) {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\data\Persistence;
+use Atk4\Data\Persistence;
 
-class Folder extends \atk4\data\Model
+class Folder extends \Atk4\Data\Model
 {
     public $table = 'folder';
 
@@ -16,7 +16,7 @@ class Folder extends \atk4\data\Model
         $this->addField('name');
 
         $this->hasMany('SubFolder', [new self(), 'their_field' => 'parent_id'])
-            ->addField('count', ['aggregate' => 'count', 'field' => $this->expr('*')]);
+            ->addField('count', ['aggregate' => 'count', 'field' => $this->persistence->expr($this, '*')]);
 
         $this->hasOne('parent_id', new self())
             ->addTitle();
@@ -27,9 +27,9 @@ class Folder extends \atk4\data\Model
 }
 
 /**
- * @coversDefaultClass \atk4\data\Model
+ * @coversDefaultClass \Atk4\Data\Model
  */
-class FolderTest extends \atk4\schema\PhpunitTestCase
+class FolderTest extends \Atk4\Schema\PhpunitTestCase
 {
     public function testRate()
     {

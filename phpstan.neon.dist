@@ -1,0 +1,60 @@
+parameters:
+    level: 2
+    paths:
+        - ./
+    excludes_analyse:
+        - cache/
+        - build/
+        - vendor/
+
+    # TODO review once we drop PHP 7.x support
+    treatPhpDocTypesAsCertain: false
+
+    ignoreErrors:
+        - '~^Unsafe usage of new static\(\)\.$~'
+
+        # TODO remove once https://github.com/atk4/ui/issues/1548 is resolved
+        - '~^Class Atk4\\Ui\\(Button|Icon) not found\.$~'
+
+        # TODO these rules are generated, this ignores should be fixed in the code
+        # for level = 2
+        # for src-schema/PhpunitTestCase.php
+        - '~^Access to an undefined property Atk4\\Data\\Persistence\:\:\$connection\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:dsql\(\)\.$~'
+        # for src/Action/Iterator.php
+        - '~^Access to an undefined property CallbackFilterIterator\:\:\$filterFx\.$~'
+        # for src/FieldSqlExpression.php
+        - '~^Call to an undefined method Atk4\\Data\\Model\:\:expr\(\)\.$~'
+        # for src/Model.php
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:load\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:tryLoad\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:loadAny\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:tryLoadAny\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:update\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:insert\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:export\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:prepareIterator\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:delete\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:action\(\)\.$~'
+        # for src/Model/ReferencesTrait.php (in context of class Atk4\Data\Model)
+        - '~^Call to an undefined method Atk4\\Data\\Reference\:\:refLink\(\)\.$~'
+        # for src/Persistence/Sql.php
+        - '~^Call to an undefined method Atk4\\Dsql\\Query\:\:sequence\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:expr\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:exprNow\(\)\.$~'
+        # for src/Persistence/Sql/Join.php
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:initQuery\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:lastInsertId\(\)\.$~'
+        # for src/Reference/HasMany.php
+        - '~^Call to an undefined method Atk4\\Data\\Model\:\:dsql\(\)\.$~'
+        # for tests/FieldTest.php
+        - '~^Call to an undefined method Atk4\\Data\\Reference\\HasOne\:\:addTitle\(\)\.$~'
+        # for tests/JoinSqlTest.php
+        - '~^Call to an undefined method Atk4\\Data\\Reference\\HasOne\:\:addField\(\)\.$~'
+        # for tests/LookupSqlTest.php
+        - '~^Call to an undefined method Atk4\\Data\\Reference\\HasOne\:\:withTitle\(\)\.$~'
+        # for tests/PersistentArrayTest.php
+        - '~^Call to an undefined method Atk4\\Data\\Persistence\:\:applyScope\(\)\.$~'
+        # for tests/ReferenceSqlTest.php
+        - '~^Call to an undefined method Atk4\\Data\\Reference\\HasOne\:\:addFields\(\)\.$~'
+        - '~^Call to an undefined method Atk4\\Data\\Reference\:\:addTitle\(\)\.$~'

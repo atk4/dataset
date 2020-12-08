@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests\Model;
+namespace Atk4\Data\Tests\Model;
 
 class Female extends Person
 {

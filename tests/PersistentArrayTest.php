@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\core\AtkPhpunit;
-use atk4\data\Exception;
-use atk4\data\Model;
-use atk4\data\Persistence;
-use atk4\data\tests\Model\Female as Female;
-use atk4\data\tests\Model\Male as Male;
+use Atk4\Core\AtkPhpunit;
+use Atk4\Data\Exception;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
+use Atk4\Data\Tests\Model\Female as Female;
+use Atk4\Data\Tests\Model\Male as Male;
 
 /**
- * @coversDefaultClass \atk4\data\Model
+ * @coversDefaultClass \Atk4\Data\Model
  */
 class PersistentArrayTest extends AtkPhpunit\TestCase
 {
@@ -344,7 +344,7 @@ class PersistentArrayTest extends AtkPhpunit\TestCase
         // if no condition we should get all the data back
         $iterator = $m->action('select');
         $result = $m->persistence->applyScope($m, $iterator);
-        $this->assertInstanceOf(\atk4\data\Action\Iterator::class, $result);
+        $this->assertInstanceOf(\Atk4\Data\Action\Iterator::class, $result);
         $m->unload();
         unset($iterator);
         unset($result);
@@ -460,7 +460,7 @@ class PersistentArrayTest extends AtkPhpunit\TestCase
         // if no condition we should get all the data back
         $iterator = $m->action('select');
         $result = $m->persistence->applyScope($m, $iterator);
-        $this->assertInstanceOf(\atk4\data\Action\Iterator::class, $result);
+        $this->assertInstanceOf(\Atk4\Data\Action\Iterator::class, $result);
         $m->unload();
         unset($iterator);
         unset($result);

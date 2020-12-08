@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\data\Field;
-use atk4\data\Model;
-use atk4\data\Persistence\Static_ as Persistence_Static;
-use atk4\data\ValidationException;
+use Atk4\Data\Field;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence\Static_ as Persistence_Static;
+use Atk4\Data\ValidationException;
 
 /**
  * Test various Field.
  */
-class FieldTypesTest extends \atk4\schema\PhpunitTestCase
+class FieldTypesTest extends \Atk4\Schema\PhpunitTestCase
 {
     public $pers;
 
@@ -31,21 +31,28 @@ class FieldTypesTest extends \atk4\schema\PhpunitTestCase
         $m = new Model($this->pers);
         $m->addField('email', [Field\Email::class]);
 
+        // null value
+        $m->set('email', null);
+        $m->save();
+        $this->assertNull($m->get('email'));
+
+        // normal value
         $m->set('email', 'foo@example.com');
         $m->save();
         $this->assertSame('foo@example.com', $m->get('email'));
 
-        // padding removed
+        // padding, spacing etc removed
         $m->set('email', " \t " . 'foo@example.com ' . " \n ");
         $m->save();
         $this->assertSame('foo@example.com', $m->get('email'));
 
+        // no domain - go to hell :)
         $this->expectException(ValidationException::class);
         $this->expectExceptionMessage('does not have domain');
         $m->set('email', 'qq');
     }
 
-    public function testEmailMultiple()
+    public function testEmailMultipleValues()
     {
         $m = new Model($this->pers);
         $m->addField('email', [Field\Email::class]);

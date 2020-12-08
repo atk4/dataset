@@ -41,24 +41,24 @@
   "require": {
     "php": ">=7.3.0",
     "ext-intl": "*",
-    "atk4/core": "dev-develop",
     "atk4/dsql": "dev-develop"
   },
   "require-release": {
     "php": ">=7.3.0",
     "ext-intl": "*",
-    "atk4/core": "~2.3.0",
     "atk4/dsql": "~2.3.0"
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.16",
     "johnkary/phpunit-speedtrap": "^3.2",
+    "phpstan/phpstan": "^0.12.58",
     "phpunit/phpcov": "*",
     "phpunit/phpunit": ">=9.0"
   },
   "require-dev-release": {
     "friendsofphp/php-cs-fixer": "^2.16",
     "johnkary/phpunit-speedtrap": "^3.2",
+    "phpstan/phpstan": "^0.12.58",
     "phpunit/phpcov": "*",
     "phpunit/phpunit": ">=9.0"
   },
@@ -67,8 +67,8 @@
   },
   "autoload": {
     "psr-4": {
-      "atk4\\data\\": "src/",
-      "atk4\\schema\\": "src-schema/"
+      "Atk4\\Data\\": "src/",
+      "Atk4\\Schema\\": "src-schema/"
     },
     "files": [
         "bootstrap-atk-types.php"
@@ -76,8 +76,8 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "atk4\\data\\tests\\": "tests/",
-      "atk4\\schema\\tests\\": "tests-schema/"
+      "Atk4\\Data\\Tests\\": "tests/",
+      "Atk4\\Schema\\Tests\\": "tests-schema/"
     }
   }
 }

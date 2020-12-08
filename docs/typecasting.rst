@@ -133,7 +133,7 @@ You can also use callbacks for typecasting.
 
     // encrypt data if SQL persistence
     $encrypt = function ($value, $field, $persistence) {
-        if ($persistence instanceof \atk4\data\Persistence\Sql) {
+        if ($persistence instanceof \Atk4\Data\Persistence\Sql) {
             return mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $field->key, $value);
         }
         return $value;
@@ -141,7 +141,7 @@ You can also use callbacks for typecasting.
 
     // decrypt data if SQL persistence
     $decrypt = function ($value, $field, $persistence) {
-        if ($persistence instanceof \atk4\data\Persistence\Sql) {
+        if ($persistence instanceof \Atk4\Data\Persistence\Sql) {
             return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $field->key, $value);
         }
         return $value;

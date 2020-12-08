@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace atk4\data;
+namespace Atk4\Data;
 
-use atk4\core\InitializerTrait;
-use atk4\dsql\Expression;
+use Atk4\Core\InitializerTrait;
+use Atk4\Dsql\Expression;
 
 /**
  * Class description?

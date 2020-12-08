@@ -204,7 +204,7 @@ https://github.com/atk4/report/blob/develop/src/GroupModel.php
 This code is specific to SQL databases, but can be used with any Model, so in
 order to use grouping with Agile Data, your code would be::
 
-    $m = new \atk4\report\GroupModel(new Sale($db));
+    $m = new \Atk4\Report\GroupModel(new Sale($db));
     $m->groupBy(['contractor_to', 'type'], [      // groups by 2 columns
         'c'                     => 'count(*)',    // defines aggregate formulas for fields
         'qty'                   => 'sum([])',     // [] refers back to qty
@@ -222,19 +222,19 @@ Agile Data makes it very easy to use models with a simpler persistences.
 For example, consider you want to output a "table" to the user using HTML by
 using Agile UI::
 
-    $htmltable = new \atk4\ui\Table();
+    $htmltable = new \Atk4\Ui\Table();
     $htmltable->invokeInit();
 
     $htmltable->setModel(new User($db));
 
     echo $htmltable->render();
 
-Class `\\atk4\\ui\\Table` here is designed to work with persistences and models -
+Class `\\Atk4\\Ui\\Table` here is designed to work with persistences and models -
 it will populate columns of correct type, fetch data, calculate totals if needed.
 But what if you have your data inside an array?
 You can use :php:class:`Persistence\Static_` for that::
 
-    $htmltable = new \atk4\ui\Table();
+    $htmltable = new \Atk4\Ui\Table();
     $htmltable->invokeInit();
 
     $htmltable->setModel(new User(new Persistence\Static_([
@@ -247,7 +247,7 @@ You can use :php:class:`Persistence\Static_` for that::
 Even if you don't have a model, you can use Static persistence with Generic
 model class to display VAT breakdown table::
 
-    $htmltable = new \atk4\ui\Table();
+    $htmltable = new \Atk4\Ui\Table();
     $htmltable->invokeInit();
 
     $htmltable->setModel(new Model(new Persistence\Static_([
@@ -259,7 +259,7 @@ model class to display VAT breakdown table::
 
 It can be made even simpler::
 
-    $htmltable = new \atk4\ui\Table();
+    $htmltable = new \Atk4\Ui\Table();
     $htmltable->invokeInit();
 
     $htmltable->setModel(new Model(new Persistence\Static_([
@@ -271,7 +271,7 @@ It can be made even simpler::
 
 Agile UI even offers a wrapper for static persistence::
 
-    $htmltable = new \atk4\ui\Table();
+    $htmltable = new \Atk4\Ui\Table();
     $htmltable->invokeInit();
 
     $htmltable->setSource([ 'John', 'Peter' ]);

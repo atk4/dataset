@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Reference;
+namespace Atk4\Data\Reference;
 
-use atk4\data\Model;
-use atk4\data\Persistence;
-use atk4\data\Reference;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
+use Atk4\Data\Reference;
 
 /**
  * ContainsOne reference.
@@ -35,10 +35,7 @@ class ContainsOne extends Reference
      *
      * @var array
      */
-    public $ui = [
-        'visible' => false, // not visible in UI Table, Grid and Crud
-        'editable' => true, // but should be editable in UI Form
-    ];
+    public $ui = [];
 
     /**
      * Required! We need table alias for internal use only.
@@ -60,14 +57,18 @@ class ContainsOne extends Reference
         }
 
         $ourModel = $this->getOurModel();
+        $ourField = $this->getOurFieldName();
 
-        if (!$ourModel->hasElement($this->our_field)) {
-            $ourModel->addField($this->our_field, [
+        if (!$ourModel->hasElement($ourField)) {
+            $ourModel->addField($ourField, [
                 'type' => $this->type,
                 'reference' => $this,
                 'system' => $this->system,
                 'caption' => $this->caption, // it's ref models caption, but we can use it here for field too
-                'ui' => $this->ui,
+                'ui' => array_merge([
+                    'visible' => false, // not visible in UI Table, Grid and Crud
+                    'editable' => true, // but should be editable in UI Form
+                ], $this->ui),
             ]);
         }
     }

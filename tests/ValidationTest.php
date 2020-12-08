@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\core\AtkPhpunit;
-use atk4\data\Model;
-use atk4\data\Persistence;
-use atk4\data\ValidationException;
+use Atk4\Core\AtkPhpunit;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
+use Atk4\Data\ValidationException;
 
 class MyValidationModel extends Model
 {
@@ -92,7 +92,7 @@ class ValidationTests extends AtkPhpunit\TestCase
             $this->m->set('domain', 'example.com');
             $this->m->save();
             $this->fail('Expected exception');
-        } catch (\atk4\data\ValidationException $e) {
+        } catch (\Atk4\Data\ValidationException $e) {
             $this->assertSame('This domain is reserved for examples only', $e->getParams()['errors']['domain']);
 
             return;
@@ -124,7 +124,7 @@ class ValidationTests extends AtkPhpunit\TestCase
             $this->m->set('name', 'C#');
             $this->m->save();
             $this->fail('Expected exception');
-        } catch (\atk4\data\ValidationException $e) {
+        } catch (\Atk4\Data\ValidationException $e) {
             $this->assertSame('No sharp objects allowed', $e->errors['name']);
         }
 
@@ -133,7 +133,7 @@ class ValidationTests extends AtkPhpunit\TestCase
             $this->m->set('domain', 'example.com');
             $this->m->save();
             $this->fail('Expected exception');
-        } catch (\atk4\data\ValidationException $e) {
+        } catch (\Atk4\Data\ValidationException $e) {
             $this->assertSame(2, count($e->errors));
         }
     }

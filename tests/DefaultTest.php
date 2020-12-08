@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\data\Model;
+use Atk4\Data\Model;
 
-class DefaultTest extends \atk4\schema\PhpunitTestCase
+class DefaultTest extends \Atk4\Schema\PhpunitTestCase
 {
     public function testDefaultValue()
     {

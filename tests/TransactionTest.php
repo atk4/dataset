@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\data\Model;
-use atk4\data\Persistence;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
 
 /**
  * Various tests to make sure transactions work OK.
  */
-class TransactionTest extends \atk4\schema\PhpunitTestCase
+class TransactionTest extends \Atk4\Schema\PhpunitTestCase
 {
     public function testAtomicOperations()
     {

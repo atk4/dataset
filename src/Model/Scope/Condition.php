@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Model\Scope;
+namespace Atk4\Data\Model\Scope;
 
-use atk4\core\ReadableCaptionTrait;
-use atk4\data\Exception;
-use atk4\data\Field;
-use atk4\data\Model;
-use atk4\dsql\Expression;
-use atk4\dsql\Expressionable;
+use Atk4\Core\ReadableCaptionTrait;
+use Atk4\Data\Exception;
+use Atk4\Data\Field;
+use Atk4\Data\Model;
+use Atk4\Dsql\Expression;
+use Atk4\Dsql\Expressionable;
 
 class Condition extends AbstractScope
 {

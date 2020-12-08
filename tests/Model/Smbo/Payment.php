@@ -2,21 +2,26 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests\Model\Smbo;
+namespace Atk4\Data\Tests\Model\Smbo;
+
+use Atk4\Data\Model;
 
 class Payment extends Document
 {
+    /** @var Model\Join */
+    public $j_payment;
+
     protected function init(): void
     {
         parent::init();
 
         $this->addCondition('doc_type', 'payment');
 
-        $j_p = $this->j_payment = $this->join('payment.document_id');
+        $this->j_payment = $this->join('payment.document_id');
 
-        $j_p->addField('cheque_no');
-        $j_p->hasOne('account_id', new Account());
+        $this->j_payment->addField('cheque_no');
+        $this->j_payment->hasOne('account_id', new Account());
 
-        $j_p->addField('misc_payment', ['type' => 'bool']);
+        $this->j_payment->addField('misc_payment', ['type' => 'bool']);
     }
 }

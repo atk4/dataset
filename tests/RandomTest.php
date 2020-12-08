@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\data\Exception;
-use atk4\data\Model;
-use atk4\data\Persistence;
+use Atk4\Data\Exception;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
 
-class Model_Rate extends \atk4\data\Model
+class Model_Rate extends \Atk4\Data\Model
 {
     public $table = 'rate';
 
@@ -20,7 +20,7 @@ class Model_Rate extends \atk4\data\Model
         $this->addField('ask');
     }
 }
-class Model_Item extends \atk4\data\Model
+class Model_Item extends \Atk4\Data\Model
 {
     public $table = 'item';
 
@@ -32,7 +32,7 @@ class Model_Item extends \atk4\data\Model
             ->addTitle();
     }
 }
-class Model_Item2 extends \atk4\data\Model
+class Model_Item2 extends \Atk4\Data\Model
 {
     public $table = 'item';
 
@@ -45,7 +45,7 @@ class Model_Item2 extends \atk4\data\Model
             ->addTitle();
     }
 }
-class Model_Item3 extends \atk4\data\Model
+class Model_Item3 extends \Atk4\Data\Model
 {
     public $table = 'item';
 
@@ -67,9 +67,9 @@ class Model_Item3 extends \atk4\data\Model
 }
 
 /**
- * @coversDefaultClass \atk4\data\Model
+ * @coversDefaultClass \Atk4\Data\Model
  */
-class RandomTest extends \atk4\schema\PhpunitTestCase
+class RandomTest extends \Atk4\Schema\PhpunitTestCase
 {
     public function testRate()
     {
@@ -257,7 +257,7 @@ class RandomTest extends \atk4\schema\PhpunitTestCase
             // we can use afterUpdate to make sure that record was updated
 
             if (!$st->rowCount()) {
-                throw (new \atk4\core\Exception('Update didn\'t affect any records'))
+                throw (new \Atk4\Core\Exception('Update didn\'t affect any records'))
                     ->addMoreInfo('query', $update->getDebugQuery())
                     ->addMoreInfo('statement', $st)
                     ->addMoreInfo('model', $m)
@@ -343,8 +343,8 @@ class RandomTest extends \atk4\schema\PhpunitTestCase
         ]);
 
         $m = new Model_Rate($db);
-        $m->addField('x1', new \atk4\data\FieldSql());
-        $m->addField('x2', new \atk4\data\Field());
+        $m->addField('x1', new \Atk4\Data\FieldSql());
+        $m->addField('x2', new \Atk4\Data\Field());
         $m->load(1);
 
         $this->assertEquals(3.4, $m->get('bid'));
@@ -357,7 +357,7 @@ class RandomTest extends \atk4\schema\PhpunitTestCase
         $db = new Persistence\Sql($this->db->connection);
         $m = new Model($db, 'user');
 
-        // caption is not set, so generate it from class name \atk4\data\Model
+        // caption is not set, so generate it from class name \Atk4\Data\Model
         $this->assertSame('Atk 4 Data Model', $m->getModelCaption());
 
         // caption is set
@@ -517,6 +517,6 @@ class RandomTest extends \atk4\schema\PhpunitTestCase
     }
 }
 
-class CustomField extends \atk4\data\Field
+class CustomField extends \Atk4\Data\Field
 {
 }

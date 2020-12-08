@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Model;
+namespace Atk4\Data\Model;
 
 /**
  * Provides native Model methods for join functionality.

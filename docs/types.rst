@@ -1,5 +1,5 @@
 
-.. php:namespace:: atk4\data\Field
+.. php:namespace:: Atk4\Data\Field
 
 ==========
 Data Types
@@ -23,12 +23,12 @@ inside a Table or Form and can be exported through RestAPI::
 
 We also allow use of custom Field implementation::
 
-    $this->addField('encrypted_password', new \atk4\login\Field\Password());
+    $this->addField('encrypted_password', new \Atk4\Login\Field\Password());
 
 A properly implemented type will still be able to offer some means to present
 it in human-readable format, however in some cases, if you plan on using ATK UI,
 you would have to create a custom decorators/FormField to properly read and
-present your type value. See :php:attr:`\\atk4\\ui\\Field::ui`.
+present your type value. See :php:attr:`\\Atk4\\Ui\\Field::ui`.
 
 Persistence mechanics and Serialization
 =======================================

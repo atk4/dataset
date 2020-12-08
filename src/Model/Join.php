@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Model;
+namespace Atk4\Data\Model;
 
-use atk4\core\DiContainerTrait;
-use atk4\core\InitializerTrait;
-use atk4\core\TrackableTrait;
-use atk4\data\Exception;
-use atk4\data\Model;
-use atk4\data\Persistence;
-use atk4\data\Reference;
+use Atk4\Core\DiContainerTrait;
+use Atk4\Core\InitializerTrait;
+use Atk4\Core\TrackableTrait;
+use Atk4\Data\Exception;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
+use Atk4\Data\Reference;
 
 /**
  * Provides generic functionality for joining data.
@@ -211,7 +211,7 @@ class Join
      * @param string $name
      * @param array  $seed
      *
-     * @return \atk4\data\Field
+     * @return \Atk4\Data\Field
      */
     public function addField($name, $seed = [])
     {

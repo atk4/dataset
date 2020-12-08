@@ -40,7 +40,7 @@ SQL Field
 
     SQL Fields can be used inside other SQL expressions::
 
-        $q = new \atk4\dsql\Expression('[age] + [birth_year]', [
+        $q = new \Atk4\Dsql\Expression('[age] + [birth_year]', [
                 'age'        => $m->getField('age'),
                 'birth_year' => $m->getField('birth_year'),
             ]);
@@ -200,14 +200,14 @@ Custom Expressions
     Persistence\Sql so the most convenient way to use this method is by calling
     `$model->expr('foo')`.
 
-This method is quite similar to \atk4\dsql\Query::expr() method explained here:
+This method is quite similar to \Atk4\Dsql\Query::expr() method explained here:
 http://dsql.readthedocs.io/en/stable/expressions.html
 
 There is, however, one difference. Expression class requires all named arguments
 to be specified. Use of Model::expr() allows you to specify field names and those
 field expressions will be automatically substituted. Here is long / short format::
 
-    $q = new \atk4\dsql\Expression('[age] + [birth_year]', [
+    $q = new \Atk4\Dsql\Expression('[age] + [birth_year]', [
             'age' => $m->getField('age'),
             'birth_year' => $m->getField('birth_year')
         ]);
@@ -333,7 +333,7 @@ will loose ability to use the same model with non-sql persistences.
 
 Sometimes you can fence the code like this::
 
-    if ($this->persistence instanceof \atk4\data\Persistence\Sql) {
+    if ($this->persistence instanceof \Atk4\Data\Persistence\Sql) {
         .. sql code ..
     }
 
@@ -362,7 +362,7 @@ Depending on the statement you can also use your statement to retrieve data::
 This can be handy if you wish to create a method for your Model to abstract away
 the data::
 
-    class Client extends \atk4\data\Model {
+    class Client extends \Atk4\Data\Model {
         function init(): void {
             ...
         }
@@ -381,7 +381,7 @@ the data::
 
 Here is another example using PHP generator::
 
-    class Client extends \atk4\data\Model {
+    class Client extends \Atk4\Data\Model {
         function init(): void {
             ...
         }
@@ -409,7 +409,7 @@ as a Model Field
 any expression for your field query. You can use SQL stored function for data
 fetching like this::
 
-    class Category extends \atk4\data\Model {
+    class Category extends \Atk4\Data\Model {
         public $table = 'category';
         function init(): void {
             parent::init();
@@ -437,7 +437,7 @@ Method :php:meth:`Persistence\\Sql::action` and :php:meth:`Model::action`
 generates queries for most of model operations.  By re-defining this method,
 you can significantly affect the query building of an SQL model::
 
-    class CompanyProfit extends \atk4\data\Model {
+    class CompanyProfit extends \Atk4\Data\Model {
 
         public $company_id = null; // inject company_id, which will act as a condition/argument
         public $read_only  = true; // instructs rest of the app, that this model is read-only
@@ -467,7 +467,7 @@ you can significantly affect the query building of an SQL model::
                 ]);
             }
 
-            throw (new \atk4\core\Exception('You may only perform "select" or "count" action on this model'))
+            throw (new \Atk4\Core\Exception('You may only perform "select" or "count" action on this model'))
                 ->addMoreInfo('action', $mode);
         }
     }
@@ -479,7 +479,7 @@ A most convenient (although inefficient) way for stored procedures is to place
 output data inside a temporary table. You can perform an actual call to stored
 procedure inside Model::init() then set $table property to a temporary table::
 
-    class NominalReport extends \atk4\data\Model {
+    class NominalReport extends \Atk4\Data\Model {
         public $table = 'temp_nominal_sheet';
         public $read_only = true; // instructs rest of the app, that this model is read-only
 
@@ -505,7 +505,7 @@ as an Model Source
 
 Technically you can also specify expression as a $table property of your model::
 
-    class ClientReport extends \atk4\data\Model {
+    class ClientReport extends \Atk4\Data\Model {
 
         public $table = null; // will be set in init()
         public $read_only = true; // instructs rest of the app, that this model is read-only

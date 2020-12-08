@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Persistence\Sql;
+namespace Atk4\Data\Persistence\Sql;
 
-use atk4\data\Model;
-use atk4\data\Persistence;
-use atk4\dsql\Expression;
-use atk4\dsql\Query;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
+use Atk4\Dsql\Expression;
+use Atk4\Dsql\Query;
 
 /**
  * Provides model joining functionality specific for the Sql persistence.
@@ -15,13 +15,13 @@ use atk4\dsql\Query;
  * @property Persistence\Sql $persistence
  * @property static          $join
  */
-class Join extends Model\Join implements \atk4\dsql\Expressionable
+class Join extends Model\Join implements \Atk4\Dsql\Expressionable
 {
     /**
      * By default we create ON expression ourselves, but if you want to specify
      * it, use the 'on' property.
      *
-     * @var \atk4\dsql\Expression
+     * @var \Atk4\Dsql\Expression
      */
     protected $on;
 
@@ -36,7 +36,7 @@ class Join extends Model\Join implements \atk4\dsql\Expressionable
     /**
      * Returns DSQL Expression.
      *
-     * @param \atk4\dsql\Expression $q
+     * @param \Atk4\Dsql\Expression $q
      */
     public function getDsqlExpression($q): Expression
     {
@@ -123,7 +123,7 @@ class Join extends Model\Join implements \atk4\dsql\Expressionable
         if ($this->on) {
             $query->join(
                 $this->foreign_table,
-                $this->on instanceof \atk4\dsql\Expression ? $this->on : $this->getOwner()->expr($this->on),
+                $this->on instanceof \Atk4\Dsql\Expression ? $this->on : $this->getOwner()->expr($this->on),
                 $this->kind,
                 $this->foreign_alias
             );

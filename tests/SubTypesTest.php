@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\data\Model;
+use Atk4\Data\Model;
 
 class StAccount extends Model
 {
@@ -135,7 +135,7 @@ class StTransaction_TransferIn extends StGenericTransaction
 /**
  * Implements various tests for deep copying objects.
  */
-class SubTypesTest extends \atk4\schema\PhpunitTestCase
+class SubTypesTest extends \Atk4\Schema\PhpunitTestCase
 {
     protected function setUp(): void
     {

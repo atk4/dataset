@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\data\Exception;
-use atk4\data\Model;
+use Atk4\Data\Exception;
+use Atk4\Data\Model;
 
 /**
  * Model structure:.
@@ -122,12 +122,12 @@ class Discount2 extends Model
 // ============================================================================
 
 /**
- * @coversDefaultClass \atk4\data\Model
+ * @coversDefaultClass \Atk4\Data\Model
  *
  * ATK Data has support of containsOne / containsMany.
  * Basically data model can contain other data models with one or many records.
  */
-class ContainsManyTest extends \atk4\schema\PhpunitTestCase
+class ContainsManyTest extends \Atk4\Schema\PhpunitTestCase
 {
     protected function setUp(): void
     {

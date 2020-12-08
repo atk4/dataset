@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Model;
+namespace Atk4\Data\Model;
 
-use atk4\core\ContainerTrait;
-use atk4\data\Exception;
-use atk4\data\Model;
+use Atk4\Core\ContainerTrait;
+use Atk4\Data\Exception;
+use Atk4\Data\Model;
 
 /**
  * @property Scope\AbstractScope[] $elements

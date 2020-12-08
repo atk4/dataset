@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\data\Exception;
-use atk4\data\Model;
-use atk4\data\Model\Scope;
-use atk4\data\Model\Scope\Condition;
-use atk4\dsql\Expression;
+use Atk4\Data\Exception;
+use Atk4\Data\Model;
+use Atk4\Data\Model\Scope;
+use Atk4\Data\Model\Scope\Condition;
+use Atk4\Dsql\Expression;
 use Doctrine\DBAL\Platforms\SqlitePlatform;
 
 class SCountry extends Model
@@ -71,7 +71,7 @@ class STicket extends Model
     }
 }
 
-class ScopeTest extends \atk4\schema\PhpunitTestCase
+class ScopeTest extends \Atk4\Schema\PhpunitTestCase
 {
     protected $user;
     protected $country;

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\core\Exception;
-use atk4\data\Model;
-use atk4\data\Persistence\Static_ as Persistence_Static;
+use Atk4\Core\Exception;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence\Static_ as Persistence_Static;
 
 /**
  * Sample trait designed to extend model.
@@ -51,7 +51,7 @@ class UaClient extends Model
 /**
  * Implements various tests for UserAction.
  */
-class UserActionTest extends \atk4\schema\PhpunitTestCase
+class UserActionTest extends \Atk4\Schema\PhpunitTestCase
 {
     public $pers;
 
@@ -162,7 +162,7 @@ class UserActionTest extends \atk4\schema\PhpunitTestCase
 
     public function testException1()
     {
-        $this->expectException(\atk4\core\Exception::class);
+        $this->expectException(\Atk4\Core\Exception::class);
         $client = new UaClient($this->pers);
         $client->getUserAction('non_existant_action');
     }

@@ -107,7 +107,7 @@ This now re-shifts the balance and makes it possible to implement any generic UI
 It's important to note, that glue may also interact with the model preparing it for a specific use-case:
 
 ``` php
-$grid = new \atk4\ui\Table();
+$grid = new \Atk4\Ui\Table();
 $data = new Order($db);
 $data->addCondition('is_new', true);
 $data->addCondition('client_id', $_GET['client_id']);
@@ -172,7 +172,7 @@ Your Report Model:
 In order to output results on HTML table:
 
 ``` php
-$grid = new \atk4\ui\Grid();
+$grid = new \Atk4\Ui\Grid();
 $data = new JobReport($db);
 $grid->setModel($data);
 
@@ -182,12 +182,12 @@ $html = $grid->render();
 Or if you want to display them as a Chart, using https://github.com/atk4/chart and https://github.com/atk4/report
 
 ``` php
-$chart = new \atk4\chart\BarChart();
+$chart = new \Atk4\Chart\BarChart();
 $data = new JobReport($db);
 
 // BarChart wants aggregated data
 $data->addExpression('month', 'month([date])');
-$aggregate = new \atk4\report\GroupModel($data);
+$aggregate = new \Atk4\Report\GroupModel($data);
 $aggregate->groupBy('month', ['profit_margin'=>'sum']);
 
 // Associate presentation with data
@@ -257,7 +257,7 @@ Agile Models are not Entities. They don't represent a single record, but rather 
 
 Read more on [working with individual data records](http://agile-data.readthedocs.io/en/develop/persistence.html).
 
-#### Q: I do not like to use class `\atk4\data\Model` as a parent
+#### Q: I do not like to use class `\Atk4\Data\Model` as a parent
 
 Class `Model` implements a lot of essential functionality. As I mentioned before Model is not an Entity, so while iterating through result, no multiple Model instances are created. If you need a deeper explanation read my blog post: http://www.agiletoolkit.org/blog/why-should-you-extend-your-entity-class
 
@@ -349,7 +349,7 @@ If you have enjoyed those examples and would like to try them yourself, continue
 Agile Data uses vendor-independent and lightweight `Model` class to describe your business entities:
 
 ``` php
-class Client extends \atk4\data\Model {
+class Client extends \Atk4\Data\Model {
   public $table = 'client';
   function init(): void {
     parent::init();
@@ -565,7 +565,7 @@ Define your first model class:
 
 ``` php
 namespace my;
-class User extends \atk4\data\Model
+class User extends \Atk4\Data\Model
 {
     public $table = 'user';
     function init(): void
@@ -583,7 +583,7 @@ Next create `console.php`:
 ``` php
 <?php
 include'vendor/autoload.php';
-$db = \atk4\data\Persistence::connect(PDO_DSN, USER, PASS);
+$db = \Atk4\Data\Persistence::connect(PDO_DSN, USER, PASS);
 eval(\Psy\sh());
 ```
 

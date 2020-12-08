@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\tests;
+namespace Atk4\Data\Tests;
 
-use atk4\core\AtkPhpunit;
-use atk4\data\Exception;
-use atk4\data\Field;
-use atk4\data\Model;
-use atk4\data\Persistence;
-use atk4\data\tests\Model\Client as Client;
-use atk4\data\tests\Model\User as User;
+use Atk4\Core\AtkPhpunit;
+use Atk4\Data\Exception;
+use Atk4\Data\Field;
+use Atk4\Data\Model;
+use Atk4\Data\Persistence;
+use Atk4\Data\Tests\Model\Client as Client;
+use Atk4\Data\Tests\Model\User as User;
 
 /**
- * @coversDefaultClass \atk4\data\Model
+ * @coversDefaultClass \Atk4\Data\Model
  */
 class BusinessModelTest extends AtkPhpunit\TestCase
 {

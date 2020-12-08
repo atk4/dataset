@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Persistence\Array_;
+namespace Atk4\Data\Persistence\Array_;
 
-use atk4\data\Exception;
-use atk4\data\Model;
+use Atk4\Data\Exception;
+use Atk4\Data\Model;
 
 /**
  * Provides model joining functionality specific for the Array_ persistence.

@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace atk4\data;
+namespace Atk4\Data;
 
-use atk4\core\CollectionTrait;
-use atk4\core\ContainerTrait;
-use atk4\core\DiContainerTrait;
-use atk4\core\DynamicMethodTrait;
-use atk4\core\Factory;
-use atk4\core\HookTrait;
-use atk4\core\InitializerTrait;
-use atk4\core\ReadableCaptionTrait;
-use atk4\dsql\Query;
+use Atk4\Core\CollectionTrait;
+use Atk4\Core\ContainerTrait;
+use Atk4\Core\DiContainerTrait;
+use Atk4\Core\DynamicMethodTrait;
+use Atk4\Core\Factory;
+use Atk4\Core\HookTrait;
+use Atk4\Core\InitializerTrait;
+use Atk4\Core\ReadableCaptionTrait;
+use Atk4\Dsql\Query;
 
 /**
  * Data model class.
@@ -129,7 +129,7 @@ class Model implements \IteratorAggregate
     public $sequence;
 
     /**
-     * Persistence driver inherited from atk4\data\Persistence.
+     * Persistence driver inherited from Atk4\Data\Persistence.
      *
      * @var Persistence|Persistence\Sql
      */
@@ -396,13 +396,13 @@ class Model implements \IteratorAggregate
             'modifier' => Model\UserAction::MODIFIER_UPDATE,
             'appliesTo' => Model\UserAction::APPLIES_TO_SINGLE_RECORD,
             'callback' => 'save',
-            'ui' => ['icon' => 'edit', 'button' => [null, 'icon' => [\atk4\ui\Icon::class, 'edit']], 'execButton' => [\atk4\ui\Button::class, 'Save', 'blue']],
+            'ui' => ['icon' => 'edit', 'button' => [null, 'icon' => [\Atk4\Ui\Icon::class, 'edit']], 'execButton' => [\Atk4\Ui\Button::class, 'Save', 'blue']],
         ]);
 
         $this->addUserAction('delete', [
             'appliesTo' => Model\UserAction::APPLIES_TO_SINGLE_RECORD,
             'modifier' => Model\UserAction::MODIFIER_DELETE,
-            'ui' => ['icon' => 'trash', 'button' => [null, 'icon' => [\atk4\ui\Icon::class, 'red trash']], 'confirm' => 'Are you sure?'],
+            'ui' => ['icon' => 'trash', 'button' => [null, 'icon' => [\Atk4\Ui\Icon::class, 'red trash']], 'confirm' => 'Are you sure?'],
             'callback' => function ($model) {
                 return $model->delete();
             },
@@ -577,7 +577,7 @@ class Model implements \IteratorAggregate
     {
         try {
             return $this->_getFromCollection($name, 'fields');
-        } catch (\atk4\core\Exception $e) {
+        } catch (\Atk4\Core\Exception $e) {
             throw (new Exception('Field is not defined in model', 0, $e))
                 ->addMoreInfo('model', $this)
                 ->addMoreInfo('field', $name);
@@ -699,7 +699,7 @@ class Model implements \IteratorAggregate
         $currentValue = array_key_exists($field, $this->data)
             ? $this->data[$field]
             : (array_key_exists($field, $this->dirty) ? $this->dirty[$field] : $f->default);
-        if (!$value instanceof \atk4\dsql\Expression && $f->compare($value, $currentValue)) {
+        if (!$value instanceof \Atk4\Dsql\Expression && $f->compare($value, $currentValue)) {
             return $this;
         }
 
@@ -764,7 +764,7 @@ class Model implements \IteratorAggregate
     {
         // set temporary hook to disable any normalization (null validation)
         $hookIndex = $this->onHookShort(self::HOOK_NORMALIZE, static function () {
-            throw new \atk4\core\HookBreaker(false);
+            throw new \Atk4\Core\HookBreaker(false);
         }, [], PHP_INT_MIN);
         try {
             return $this->set($field, null);
@@ -1172,16 +1172,16 @@ class Model implements \IteratorAggregate
      * when you save it next time, it ends up as a new
      * record in the database.
      *
-     * @param mixed|null $new_id
+     * @param mixed $newId
      *
      * @return $this
      */
-    public function duplicate($new_id = null)
+    public function duplicate($newId = null)
     {
         $this->setId(null);
 
         if ($this->id_field) {
-            $this->setId($new_id);
+            $this->setId($newId);
         }
 
         return $this;
@@ -1765,7 +1765,7 @@ class Model implements \IteratorAggregate
     /**
      * Returns iterator (yield values).
      *
-     * @return mixed
+     * @return iterable<static>
      */
     public function getIterator(): iterable
     {

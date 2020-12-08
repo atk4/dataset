@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace atk4\data\Model;
+namespace Atk4\Data\Model;
 
-use atk4\core\DiContainerTrait;
-use atk4\core\Exception;
-use atk4\core\InitializerTrait;
-use atk4\core\TrackableTrait;
-use atk4\data\Model;
+use Atk4\Core\DiContainerTrait;
+use Atk4\Core\Exception;
+use Atk4\Core\InitializerTrait;
+use Atk4\Core\TrackableTrait;
+use Atk4\Data\Model;
 
 /**
  * Implements generic user action. Assigned to a model it can be invoked by a user. Model\UserAction class contains a

@@ -10,7 +10,7 @@ Model
 Probably the most significant class in ATK Data - Model - acts as a Parent for all your
 entity classes::
 
-   class User extends \atk4\data\Model
+   class User extends \Atk4\Data\Model
 
 You must define individual classes for all your business entities. Other frameworks may rely
 on XML or annotations, in ATK everything is defined inside your "Model" class through
@@ -132,7 +132,7 @@ We actually recommend you to use namespaces instead::
 
    namespace yourapp\Model;
 
-   use \atk4\data\Model;
+   use \Atk4\Data\Model;
 
    class User extends Model {
       function init(): void {
@@ -159,7 +159,7 @@ Initialization
 Method init() will automatically be called when your Model is associated with
 Persistence object. It is commonly used to declare fields, conditions, relations, hooks and more::
 
-    class Model_User extends atk4\data\Model
+    class Model_User extends Atk4\Data\Model
     {
         function init(): void {
             parent::init();
@@ -171,7 +171,7 @@ Persistence object. It is commonly used to declare fields, conditions, relations
 
 You may safely rely on `$this->persistence` property to make choices::
 
-   if ($this->persistence instanceof \atk4\data\Persistence\Sql) {
+   if ($this->persistence instanceof \Atk4\Data\Persistence\Sql) {
 
       // Calculating on SQL server is more efficient!!
       $this->addExpression('total', '[amount] + [vat]');
@@ -789,7 +789,7 @@ Setting limit and sort order
 
     Keep in mind - `true` means `desc`, desc means descending. Otherwise it will be ascending order by default.
 
-    You can also use \atk4\dsql\Expression or array of expressions instead of field name here.
+    You can also use \Atk4\Dsql\Expression or array of expressions instead of field name here.
     Or even mix them together::
 
         $m->setOrder($m->expr('[net]*[vat]'));
